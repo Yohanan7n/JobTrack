@@ -1,0 +1,119 @@
+import React from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+import { useAuth } from '../../hooks/useAuth';
+import {
+  Briefcase,
+  LogOut,
+  User as UserIcon,
+  Shield,
+  Menu,
+} from 'lucide-react';
+
+interface NavbarProps {
+  onToggleSidebar?: () => void;
+}
+
+export const Navbar: React.FC<NavbarProps> = ({ onToggleSidebar }) => {
+  const { user, logout, isAuthenticated } = useAuth();
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    logout();
+    navigate('/login');
+  };
+
+  return (
+    <header className="sticky top-0 z-30 w-full border-b border-slate-800 bg-slate-950/80 backdrop-blur-md">
+      <div className="flex h-16 items-center justify-between px-4 sm:px-6">
+        <div className="flex items-center gap-3">
+          {isAuthenticated && (
+            <button
+              onClick={onToggleSidebar}
+              className="lg:hidden p-2 text-slate-400 hover:text-slate-200 rounded-lg hover:bg-slate-800"
+            >
+              <Menu className="w-5 h-5" />
+            </button>
+          )}
+
+          <Link to="/" className="flex items-center gap-2.5">
+            <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-gradient-to-tr from-indigo-600 to-indigo-400 text-white shadow-lg shadow-indigo-500/20">
+              <Briefcase className="h-5 w-5" />
+            </div>
+            <div className="flex flex-col">
+              <span className="text-lg font-bold tracking-tight text-white flex items-center gap-1.5 font-outfit">
+                JobTrack
+                <span className="text-[10px] font-semibold uppercase tracking-wider px-1.5 py-0.5 rounded bg-indigo-500/20 text-indigo-400 border border-indigo-500/30">
+                  Pro
+                </span>
+              </span>
+            </div>
+          </Link>
+        </div>
+
+        <div className="flex items-center gap-3">
+          {isAuthenticated ? (
+            <div className="flex items-center gap-3">
+              {user?.role === 'ADMIN' && (
+                <Link
+                  to="/admin"
+                  className="hidden sm:flex items-center gap-1.5 text-xs font-semibold px-2.5 py-1 rounded-full bg-purple-500/10 text-purple-400 border border-purple-500/30 hover:bg-purple-500/20 transition-colors"
+                >
+                  <Shield className="w-3.5 h-3.5" />
+                  Admin Panel
+                </Link>
+              )}
+
+              <Link
+                to="/profile"
+                className="flex items-center gap-2 p-1.5 rounded-lg hover:bg-slate-900 border border-transparent hover:border-slate-800 transition-colors"
+              >
+                <div className="w-8 h-8 rounded-full bg-indigo-600/30 border border-indigo-500/40 flex items-center justify-center overflow-hidden">
+                  {user?.avatar ? (
+                    <img
+                      src={user.avatar}
+                      alt={user.name}
+                      className="w-full h-full object-cover"
+                    />
+                  ) : (
+                    <UserIcon className="w-4 h-4 text-indigo-400" />
+                  )}
+                </div>
+                <div className="hidden md:flex flex-col text-left">
+                  <span className="text-xs font-medium text-slate-200 leading-tight">
+                    {user?.name}
+                  </span>
+                  <span className="text-[10px] text-slate-500 capitalize">
+                    {user?.role.toLowerCase()}
+                  </span>
+                </div>
+              </Link>
+
+              <button
+                onClick={handleLogout}
+                title="Log out"
+                className="p-2 text-slate-400 hover:text-rose-400 hover:bg-rose-500/10 rounded-lg transition-colors"
+              >
+                <LogOut className="w-4 h-4" />
+              </button>
+            </div>
+          ) : (
+            <div className="flex items-center gap-2">
+              <Link
+                to="/login"
+                className="text-xs sm:text-sm font-medium text-slate-300 hover:text-white px-3 py-1.5"
+              >
+                Sign In
+              </Link>
+              <Link
+                to="/register"
+                className="text-xs sm:text-sm font-medium bg-indigo-600 hover:bg-indigo-500 text-white px-3.5 py-1.5 rounded-lg shadow-sm"
+              >
+                Get Started
+              </Link>
+            </div>
+          )}
+        </div>
+      </div>
+    </header>
+  );
+};
