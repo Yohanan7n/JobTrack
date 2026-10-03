@@ -10,16 +10,7 @@ import {
   Camera,
   Upload,
   Trash2,
-  Sparkles,
 } from 'lucide-react';
-
-const PRESET_AVATARS = [
-  { label: 'Developer 1', url: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=200&h=200&fit=crop&crop=faces' },
-  { label: 'Developer 2', url: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=200&h=200&fit=crop&crop=faces' },
-  { label: 'Developer 3', url: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=200&h=200&fit=crop&crop=faces' },
-  { label: 'Developer 4', url: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=200&h=200&fit=crop&crop=faces' },
-  { label: 'Developer 5', url: 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=200&h=200&fit=crop&crop=faces' },
-];
 
 export const ProfilePage: React.FC = () => {
   const { user, updateUser } = useAuth();
@@ -65,25 +56,6 @@ export const ProfilePage: React.FC = () => {
       setIsUploadingPhoto(false);
       // Reset input
       if (fileInputRef.current) fileInputRef.current.value = '';
-    }
-  };
-
-  // Select one of the preset avatars
-  const handleSelectPreset = async (presetUrl: string) => {
-    try {
-      setIsUploadingPhoto(true);
-      setErrorMsg(null);
-      setSuccessMsg(null);
-
-      const res = await authService.updateProfile({ avatar: presetUrl });
-      const updated = res.data.data;
-      updateUser(updated);
-      setAvatar(presetUrl);
-      setSuccessMsg('Avatar updated from presets!');
-    } catch (err: any) {
-      setErrorMsg(err.response?.data?.error || 'Failed to update preset avatar.');
-    } finally {
-      setIsUploadingPhoto(false);
     }
   };
 
@@ -177,7 +149,7 @@ export const ProfilePage: React.FC = () => {
             Profile Picture
           </h3>
           <p className="text-xs text-slate-400 mt-0.5">
-            Upload an image from your computer or pick from the presets below anytime.
+            Upload an image directly from your computer anytime.
           </p>
         </div>
 
@@ -242,31 +214,6 @@ export const ProfilePage: React.FC = () => {
             <p className="text-[11px] text-slate-500">
               Supported formats: PNG, JPG, JPEG, WebP (max 10MB)
             </p>
-          </div>
-        </div>
-
-        {/* Quick Presets */}
-        <div className="pt-4 border-t border-slate-800">
-          <label className="block text-xs font-semibold text-slate-400 mb-2 flex items-center gap-1.5">
-            <Sparkles className="w-3.5 h-3.5 text-indigo-400" />
-            Or select an avatar preset:
-          </label>
-          <div className="flex items-center gap-3 overflow-x-auto pb-1">
-            {PRESET_AVATARS.map((preset, idx) => (
-              <button
-                key={idx}
-                type="button"
-                onClick={() => handleSelectPreset(preset.url)}
-                className={`w-11 h-11 rounded-full overflow-hidden border-2 transition-all hover:scale-105 shrink-0 ${
-                  avatar === preset.url
-                    ? 'border-indigo-500 shadow-glow-sm ring-2 ring-indigo-500/30'
-                    : 'border-slate-800 hover:border-indigo-400'
-                }`}
-                title={preset.label}
-              >
-                <img src={preset.url} alt={preset.label} className="w-full h-full object-cover" />
-              </button>
-            ))}
           </div>
         </div>
       </div>
