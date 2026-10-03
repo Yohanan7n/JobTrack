@@ -29,28 +29,28 @@ export const FilterBar: React.FC<FilterBarProps> = ({
   totalCount,
 }) => {
   return (
-    <div className="flex flex-col md:flex-row items-stretch md:items-center justify-between gap-3 p-3 bg-slate-900/80 border border-slate-800 rounded-xl mb-6">
+    <div className="flex flex-col md:flex-row items-stretch md:items-center justify-between gap-3 p-3 bg-white border border-slate-200/90 rounded-xl shadow-sm mb-6">
       {/* Left side: Search & Filters */}
       <div className="flex flex-wrap items-center gap-2.5 flex-1">
         {/* Search */}
         <div className="relative min-w-[220px] flex-1 sm:max-w-xs">
-          <Search className="w-4 h-4 text-slate-500 absolute left-3 top-1/2 -translate-y-1/2" />
+          <Search className="w-4 h-4 text-slate-400 absolute left-3 top-1/2 -translate-y-1/2" />
           <input
             type="text"
             placeholder="Search company, title, or location..."
             value={search}
             onChange={(e) => onSearchChange(e.target.value)}
-            className="w-full bg-slate-950 border border-slate-800 rounded-xl pl-9 pr-3 py-1.5 text-xs sm:text-sm text-slate-100 placeholder-slate-500 shadow-sm transition-all duration-200 focus:outline-none focus:ring-1 focus:ring-indigo-500 focus:border-indigo-500"
+            className="w-full bg-slate-50 border border-slate-200 rounded-xl pl-9 pr-3 py-1.5 text-xs sm:text-sm text-slate-900 placeholder-slate-400 shadow-sm transition-all duration-200 focus:bg-white focus:outline-none focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-600"
           />
         </div>
 
         {/* Status filter */}
         <div className="flex items-center gap-1.5">
-          <Filter className="w-3.5 h-3.5 text-slate-500" />
+          <Filter className="w-3.5 h-3.5 text-slate-400" />
           <select
             value={statusFilter}
             onChange={(e) => onStatusFilterChange(e.target.value)}
-            className="bg-slate-950 border border-slate-800 rounded-xl px-2.5 py-1.5 text-xs text-slate-300 shadow-sm transition-all duration-200 focus:outline-none focus:ring-1 focus:ring-indigo-500"
+            className="bg-slate-50 border border-slate-200 rounded-xl px-2.5 py-1.5 text-xs text-slate-700 shadow-sm transition-all duration-200 focus:bg-white focus:outline-none focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-600"
           >
             <option value="ALL">All Stages ({totalCount})</option>
             {KANBAN_STAGES.map((s) => (
@@ -65,7 +65,7 @@ export const FilterBar: React.FC<FilterBarProps> = ({
         <select
           value={locationFilter}
           onChange={(e) => onLocationFilterChange(e.target.value)}
-          className="bg-slate-950 border border-slate-800 rounded-xl px-2.5 py-1.5 text-xs text-slate-300 shadow-sm transition-all duration-200 focus:outline-none focus:ring-1 focus:ring-indigo-500"
+          className="bg-slate-50 border border-slate-200 rounded-xl px-2.5 py-1.5 text-xs text-slate-700 shadow-sm transition-all duration-200 focus:bg-white focus:outline-none focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-600"
         >
           <option value="ALL">All Locations</option>
           {LOCATION_TYPES.map((lt) => (
@@ -77,14 +77,14 @@ export const FilterBar: React.FC<FilterBarProps> = ({
       </div>
 
       {/* Right side: View Toggle & Add Button */}
-      <div className="flex items-center justify-between md:justify-end gap-2 border-t md:border-t-0 pt-2 md:pt-0 border-slate-800">
-        <div className="flex items-center bg-slate-950 p-1 rounded-xl border border-slate-800">
+      <div className="flex items-center justify-between md:justify-end gap-2 border-t md:border-t-0 pt-2 md:pt-0 border-slate-100">
+        <div className="flex items-center bg-slate-100 p-1 rounded-xl border border-slate-200/80">
           <button
             onClick={() => onViewModeChange('kanban')}
             className={`p-1.5 rounded-lg text-xs flex items-center gap-1 transition-all duration-200 ${
               viewMode === 'kanban'
-                ? 'bg-indigo-600 text-white font-medium shadow-sm'
-                : 'text-slate-400 hover:text-slate-200'
+                ? 'bg-white text-indigo-600 font-semibold shadow-sm'
+                : 'text-slate-600 hover:text-slate-900'
             }`}
             title="Pipeline Board view"
           >
@@ -95,8 +95,8 @@ export const FilterBar: React.FC<FilterBarProps> = ({
             onClick={() => onViewModeChange('table')}
             className={`p-1.5 rounded-lg text-xs flex items-center gap-1 transition-all duration-200 ${
               viewMode === 'table'
-                ? 'bg-indigo-600 text-white font-medium shadow-sm'
-                : 'text-slate-400 hover:text-slate-200'
+                ? 'bg-white text-indigo-600 font-semibold shadow-sm'
+                : 'text-slate-600 hover:text-slate-900'
             }`}
             title="Table List view"
           >

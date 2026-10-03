@@ -71,12 +71,12 @@ export const InterviewsPage: React.FC = () => {
 
   return (
     <div className="space-y-6 animate-fade-in">
-      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 pb-2 border-b border-slate-800">
+      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 pb-2 border-b border-slate-200">
         <div>
-          <h1 className="text-2xl font-bold tracking-tight text-slate-100 font-outfit">
+          <h1 className="text-2xl font-bold tracking-tight text-slate-900 font-outfit">
             Interview Schedule
           </h1>
-          <p className="text-xs sm:text-sm text-slate-400">
+          <p className="text-xs sm:text-sm text-slate-500">
             Never miss a technical screening, coding round, or behavioral interview.
           </p>
         </div>
@@ -95,7 +95,7 @@ export const InterviewsPage: React.FC = () => {
       </div>
 
       {/* Filter Tabs */}
-      <div className="flex items-center gap-2 border-b border-slate-800 pb-3">
+      <div className="flex items-center gap-2 border-b border-slate-200 pb-3">
         {(['all', 'upcoming', 'past'] as const).map((t) => (
           <button
             key={t}
@@ -103,7 +103,7 @@ export const InterviewsPage: React.FC = () => {
             className={`px-3.5 py-1.5 rounded-xl text-xs font-semibold capitalize shadow-sm transition-all duration-200 ${
               timeframe === t
                 ? 'bg-indigo-600 text-white shadow-sm'
-                : 'bg-slate-900 text-slate-400 hover:text-slate-200 border border-slate-800'
+                : 'bg-white text-slate-600 hover:text-slate-900 border border-slate-200'
             }`}
           >
             {t} ({interviews.length})
@@ -113,9 +113,9 @@ export const InterviewsPage: React.FC = () => {
 
       {/* Interviews list */}
       {interviews.length === 0 ? (
-        <div className="text-center py-16 bg-slate-900/30 rounded-2xl border border-slate-800">
-          <Calendar className="w-12 h-12 text-slate-600 mx-auto mb-3" />
-          <h3 className="text-base font-semibold text-slate-300">No interviews found</h3>
+        <div className="text-center py-16 bg-white rounded-2xl border border-slate-200/90 shadow-sm">
+          <Calendar className="w-12 h-12 text-slate-300 mx-auto mb-3" />
+          <h3 className="text-base font-semibold text-slate-800">No interviews found</h3>
           <p className="text-xs text-slate-500 mt-1">
             Schedule an upcoming interview round to keep track of prep notes and links.
           </p>
@@ -125,92 +125,92 @@ export const InterviewsPage: React.FC = () => {
           {interviews.map((iv) => (
             <div
               key={iv.id}
-              className="p-6 rounded-2xl bg-slate-900/80 border border-slate-800 hover:border-indigo-500/40 shadow-sm hover:shadow transition-all duration-200 flex flex-col md:flex-row md:items-center justify-between gap-4"
+              className="p-6 rounded-2xl bg-white border border-slate-200/90 hover:border-indigo-400/80 shadow-sm hover:shadow-md transition-all duration-200 flex flex-col md:flex-row md:items-center justify-between gap-4"
             >
-                <div className="space-y-2 flex-1">
-                  <div className="flex flex-wrap items-center gap-2">
-                    <span className="text-xs font-semibold px-2 py-0.5 rounded-full bg-sky-500/10 text-sky-400 border border-sky-500/20">
-                      {iv.type}
-                    </span>
-                    <span
-                      className={`text-[10px] font-semibold px-2 py-0.5 rounded-full border ${
-                        iv.status === 'COMPLETED'
-                          ? 'bg-emerald-500/10 text-emerald-400 border-emerald-500/20'
-                          : iv.status === 'CANCELLED'
-                          ? 'bg-rose-500/10 text-rose-400 border-rose-500/20'
-                          : 'bg-indigo-500/10 text-indigo-400 border-indigo-500/20'
-                      }`}
-                    >
-                      {iv.status}
-                    </span>
-                  </div>
-
-                  <h3 className="text-base font-bold text-slate-100">{iv.title}</h3>
-
-                  <div className="flex flex-wrap items-center gap-4 text-xs text-slate-400">
-                    <div className="flex items-center gap-1.5 text-indigo-300 font-medium">
-                      <Building className="w-3.5 h-3.5" />
-                      <span>{iv.application?.companyName} — {iv.application?.position}</span>
-                    </div>
-
-                    <div className="flex items-center gap-1.5 text-slate-300">
-                      <Clock className="w-3.5 h-3.5 text-sky-400" />
-                      <span>{formatDateTime(iv.scheduledAt)}</span>
-                    </div>
-
-                    {iv.interviewer && (
-                      <div className="flex items-center gap-1.5">
-                        <User className="w-3.5 h-3.5 text-slate-500" />
-                        <span>{iv.interviewer}</span>
-                      </div>
-                    )}
-                  </div>
-
-                  {iv.notes && (
-                    <p className="text-xs text-slate-400 bg-slate-950/60 p-2.5 rounded-lg border border-slate-800/80 leading-relaxed max-w-3xl">
-                      <strong>Prep notes:</strong> {iv.notes}
-                    </p>
-                  )}
-                </div>
-
-                {/* Actions */}
-                <div className="flex items-center gap-2 shrink-0 border-t md:border-t-0 pt-3 md:pt-0 border-slate-800">
-                  {iv.location && iv.location.startsWith('http') && (
-                    <a
-                      href={iv.location}
-                      target="_blank"
-                      rel="noreferrer"
-                      className="px-3 py-1.5 rounded-lg bg-indigo-600/20 text-indigo-300 border border-indigo-500/30 hover:bg-indigo-600/30 text-xs font-semibold flex items-center gap-1.5 transition-colors"
-                    >
-                      <Video className="w-3.5 h-3.5" /> Join Call
-                    </a>
-                  )}
-
-                  {iv.status === 'SCHEDULED' && (
-                    <button
-                      onClick={() => handleMarkStatus(iv.id, 'COMPLETED')}
-                      title="Mark as completed"
-                      className="p-2 text-slate-400 hover:text-emerald-400 hover:bg-emerald-500/10 rounded-lg transition-colors"
-                    >
-                      <CheckCircle className="w-4 h-4" />
-                    </button>
-                  )}
-
-                  <button
-                    onClick={() => {
-                      setSelectedInterview(iv);
-                      setIsModalOpen(true);
-                    }}
-                    title="Edit details"
-                    className="p-2 text-slate-400 hover:text-slate-200 hover:bg-slate-800 rounded-lg transition-colors"
+              <div className="space-y-2 flex-1">
+                <div className="flex flex-wrap items-center gap-2">
+                  <span className="text-xs font-semibold px-2.5 py-0.5 rounded-full bg-sky-50 text-sky-700 border border-sky-200/80">
+                    {iv.type}
+                  </span>
+                  <span
+                    className={`text-[10px] font-semibold px-2.5 py-0.5 rounded-full border ${
+                      iv.status === 'COMPLETED'
+                        ? 'bg-emerald-50 text-emerald-700 border-emerald-200'
+                        : iv.status === 'CANCELLED'
+                        ? 'bg-rose-50 text-rose-700 border-rose-200'
+                        : 'bg-indigo-50 text-indigo-700 border-indigo-200'
+                    }`}
                   >
-                    <FileEdit className="w-4 h-4" />
-                  </button>
+                    {iv.status}
+                  </span>
                 </div>
+
+                <h3 className="text-base font-bold text-slate-900">{iv.title}</h3>
+
+                <div className="flex flex-wrap items-center gap-4 text-xs text-slate-500">
+                  <div className="flex items-center gap-1.5 text-indigo-600 font-medium">
+                    <Building className="w-3.5 h-3.5" />
+                    <span>{iv.application?.companyName} — {iv.application?.position}</span>
+                  </div>
+
+                  <div className="flex items-center gap-1.5 text-slate-600">
+                    <Clock className="w-3.5 h-3.5 text-sky-600" />
+                    <span>{formatDateTime(iv.scheduledAt)}</span>
+                  </div>
+
+                  {iv.interviewer && (
+                    <div className="flex items-center gap-1.5">
+                      <User className="w-3.5 h-3.5 text-slate-400" />
+                      <span>{iv.interviewer}</span>
+                    </div>
+                  )}
+                </div>
+
+                {iv.notes && (
+                  <p className="text-xs text-slate-600 bg-slate-50 p-3 rounded-xl border border-slate-200 leading-relaxed max-w-3xl">
+                    <strong className="text-slate-800">Prep notes:</strong> {iv.notes}
+                  </p>
+                )}
               </div>
-            ))}
-          </div>
-        )}
+
+              {/* Actions */}
+              <div className="flex items-center gap-2 shrink-0 border-t md:border-t-0 pt-3 md:pt-0 border-slate-100">
+                {iv.location && iv.location.startsWith('http') && (
+                  <a
+                    href={iv.location}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="px-3 py-1.5 rounded-xl bg-indigo-50 text-indigo-700 border border-indigo-200 hover:bg-indigo-100 text-xs font-semibold flex items-center gap-1.5 transition-colors shadow-sm"
+                  >
+                    <Video className="w-3.5 h-3.5" /> Join Call
+                  </a>
+                )}
+
+                {iv.status === 'SCHEDULED' && (
+                  <button
+                    onClick={() => handleMarkStatus(iv.id, 'COMPLETED')}
+                    title="Mark as completed"
+                    className="p-2 text-slate-400 hover:text-emerald-600 hover:bg-emerald-50 rounded-xl transition-colors border border-transparent hover:border-emerald-200"
+                  >
+                    <CheckCircle className="w-4 h-4" />
+                  </button>
+                )}
+
+                <button
+                  onClick={() => {
+                    setSelectedInterview(iv);
+                    setIsModalOpen(true);
+                  }}
+                  title="Edit details"
+                  className="p-2 text-slate-400 hover:text-slate-700 hover:bg-slate-100 rounded-xl transition-colors border border-transparent hover:border-slate-200"
+                >
+                  <FileEdit className="w-4 h-4" />
+                </button>
+              </div>
+            </div>
+          ))}
+        </div>
+      )}
 
       {/* Modal */}
       <InterviewModal

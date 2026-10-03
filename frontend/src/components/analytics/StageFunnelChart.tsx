@@ -27,27 +27,28 @@ export const StageFunnelChart: React.FC<StageFunnelChartProps> = ({ data }) => {
         <BarChart data={data} margin={{ top: 10, right: 10, left: -20, bottom: 0 }}>
           <XAxis
             dataKey="name"
-            stroke="#64748b"
+            stroke="#94a3b8"
             fontSize={12}
             tickLine={false}
-            axisLine={{ stroke: '#334155' }}
+            axisLine={{ stroke: '#e2e8f0' }}
           />
           <YAxis
-            stroke="#64748b"
+            stroke="#94a3b8"
             fontSize={12}
             tickLine={false}
-            axisLine={{ stroke: '#334155' }}
+            axisLine={{ stroke: '#e2e8f0' }}
             allowDecimals={false}
           />
           <Tooltip
             contentStyle={{
-              backgroundColor: '#0f172a',
-              borderColor: '#334155',
-              borderRadius: '8px',
+              backgroundColor: '#ffffff',
+              borderColor: '#e2e8f0',
+              borderRadius: '12px',
               fontSize: '12px',
-              color: '#f8fafc',
+              color: '#0f172a',
+              boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1)',
             }}
-            cursor={{ fill: 'rgba(255, 255, 255, 0.04)' }}
+            cursor={{ fill: 'rgba(99, 102, 241, 0.05)' }}
           />
           <Bar dataKey="count" radius={[6, 6, 0, 0]}>
             {data.map((entry, index) => (

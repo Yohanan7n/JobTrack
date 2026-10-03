@@ -33,11 +33,11 @@ export const AnalyticsPage: React.FC = () => {
 
   return (
     <div className="space-y-6 animate-fade-in">
-      <div className="pb-2 border-b border-slate-800">
-        <h1 className="text-2xl font-bold tracking-tight text-slate-100 font-outfit">
+      <div className="pb-2 border-b border-slate-200">
+        <h1 className="text-2xl font-bold tracking-tight text-slate-900 font-outfit">
           Search Intelligence & Analytics
         </h1>
-        <p className="text-xs sm:text-sm text-slate-400 mt-1">
+        <p className="text-xs sm:text-sm text-slate-500 mt-1">
           Measure application throughput, interview conversion rates, and role breakdowns.
         </p>
       </div>
@@ -77,28 +77,28 @@ export const AnalyticsPage: React.FC = () => {
       {/* Main Charts Row */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
         {/* Monthly applications */}
-        <div className="p-5 rounded-2xl bg-slate-900/70 border border-slate-800">
+        <div className="p-6 rounded-2xl bg-white border border-slate-200/90 shadow-sm">
           <div className="flex items-center justify-between mb-4">
             <div>
-              <h3 className="text-base font-bold text-slate-100 flex items-center gap-2">
-                <BarChart className="w-4 h-4 text-indigo-400" />
+              <h3 className="text-base font-bold text-slate-900 flex items-center gap-2">
+                <BarChart className="w-4 h-4 text-indigo-600" />
                 Applications Per Month
               </h3>
-              <p className="text-xs text-slate-400 mt-0.5">Historical submission volume</p>
+              <p className="text-xs text-slate-500 mt-0.5">Historical submission volume</p>
             </div>
           </div>
           {data?.monthlyTrend && <MonthlyTrendChart data={data.monthlyTrend} />}
         </div>
 
         {/* Funnel distribution */}
-        <div className="p-5 rounded-2xl bg-slate-900/70 border border-slate-800">
+        <div className="p-6 rounded-2xl bg-white border border-slate-200/90 shadow-sm">
           <div className="flex items-center justify-between mb-4">
             <div>
-              <h3 className="text-base font-bold text-slate-100 flex items-center gap-2">
-                <BarChart className="w-4 h-4 text-emerald-400" />
+              <h3 className="text-base font-bold text-slate-900 flex items-center gap-2">
+                <BarChart className="w-4 h-4 text-emerald-600" />
                 Applications by Stage
               </h3>
-              <p className="text-xs text-slate-400 mt-0.5">Count of roles across pipeline</p>
+              <p className="text-xs text-slate-500 mt-0.5">Count of roles across pipeline</p>
             </div>
           </div>
           {data?.statusDistribution && (
@@ -110,33 +110,33 @@ export const AnalyticsPage: React.FC = () => {
       {/* Roles & Workplace Type Row */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
         {/* Most common roles */}
-        <div className="p-5 rounded-2xl bg-slate-900/70 border border-slate-800">
+        <div className="p-6 rounded-2xl bg-white border border-slate-200/90 shadow-sm">
           <div className="flex items-center justify-between mb-4">
             <div>
-              <h3 className="text-base font-bold text-slate-100 flex items-center gap-2">
-                <PieIcon className="w-4 h-4 text-purple-400" />
+              <h3 className="text-base font-bold text-slate-900 flex items-center gap-2">
+                <PieIcon className="w-4 h-4 text-purple-600" />
                 Target Job Roles
               </h3>
-              <p className="text-xs text-slate-400 mt-0.5">Distribution of applied positions</p>
+              <p className="text-xs text-slate-500 mt-0.5">Distribution of applied positions</p>
             </div>
           </div>
           {data?.topRoles && data.topRoles.length > 0 ? (
             <RolesPieChart data={data.topRoles} />
           ) : (
-            <div className="h-64 flex items-center justify-center text-xs text-slate-500">
+            <div className="h-64 flex items-center justify-center text-xs text-slate-400">
               Not enough data yet
             </div>
           )}
         </div>
 
         {/* Workplace Type Breakdown */}
-        <div className="p-5 rounded-2xl bg-slate-900/70 border border-slate-800 flex flex-col justify-between">
+        <div className="p-6 rounded-2xl bg-white border border-slate-200/90 shadow-sm flex flex-col justify-between">
           <div>
-            <h3 className="text-base font-bold text-slate-100 flex items-center gap-2 mb-1">
-              <MapPin className="w-4 h-4 text-amber-400" />
+            <h3 className="text-base font-bold text-slate-900 flex items-center gap-2 mb-1">
+              <MapPin className="w-4 h-4 text-amber-500" />
               Workplace Model Breakdown
             </h3>
-            <p className="text-xs text-slate-400 mb-6">Remote vs Hybrid vs On-site positions</p>
+            <p className="text-xs text-slate-500 mb-6">Remote vs Hybrid vs On-site positions</p>
 
             <div className="space-y-4">
               {data?.locationDistribution?.map((loc) => {
@@ -145,16 +145,16 @@ export const AnalyticsPage: React.FC = () => {
                 return (
                   <div key={loc.type} className="space-y-1.5">
                     <div className="flex items-center justify-between text-xs font-semibold">
-                      <span className="text-slate-300 capitalize">{loc.type.toLowerCase()}</span>
-                      <span className="text-slate-400">
+                      <span className="text-slate-700 capitalize">{loc.type.toLowerCase()}</span>
+                      <span className="text-slate-500">
                         {loc.count} ({percentage}%)
                       </span>
                     </div>
-                    <div className="h-2 w-full bg-slate-950 rounded-full overflow-hidden border border-slate-800">
+                    <div className="h-2.5 w-full bg-slate-100 rounded-full overflow-hidden border border-slate-200">
                       <div
                         className={`h-full rounded-full transition-all duration-500 ${
                           loc.type === 'REMOTE'
-                            ? 'bg-indigo-500'
+                            ? 'bg-indigo-600'
                             : loc.type === 'HYBRID'
                             ? 'bg-sky-500'
                             : 'bg-amber-500'
@@ -168,11 +168,11 @@ export const AnalyticsPage: React.FC = () => {
             </div>
           </div>
 
-          <div className="p-4 rounded-xl bg-indigo-950/20 border border-indigo-500/20 mt-6">
-            <span className="text-xs font-semibold text-indigo-300 block mb-1">
+          <div className="p-4 rounded-xl bg-indigo-50 border border-indigo-200 mt-6">
+            <span className="text-xs font-bold text-indigo-700 block mb-1">
               Key Insight
             </span>
-            <p className="text-xs text-slate-400 leading-relaxed">
+            <p className="text-xs text-slate-600 leading-relaxed">
               Targeting Remote roles yields the highest initial interview conversion rate across your pipeline.
             </p>
           </div>

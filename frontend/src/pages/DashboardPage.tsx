@@ -71,12 +71,12 @@ export const DashboardPage: React.FC = () => {
   return (
     <div className="space-y-6 animate-fade-in">
       {/* Welcome header & Quick Action */}
-      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 pb-2 border-b border-slate-800">
+      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 pb-2 border-b border-slate-200">
         <div>
-          <h1 className="text-2xl sm:text-3xl font-extrabold tracking-tight text-slate-100 font-outfit">
+          <h1 className="text-2xl sm:text-3xl font-extrabold tracking-tight text-slate-900 font-outfit">
             Welcome back, <span className="gradient-text">{user?.name}</span>
           </h1>
-          <p className="text-xs sm:text-sm text-slate-400 mt-1">
+          <p className="text-xs sm:text-sm text-slate-500 mt-1">
             Here's what is happening across your job applications pipeline today.
           </p>
         </div>
@@ -136,37 +136,37 @@ export const DashboardPage: React.FC = () => {
 
       {/* Secondary Metrics Bar */}
       <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
-        <div className="p-4 rounded-xl bg-slate-900/60 border border-slate-800 flex items-center gap-4 shadow-sm transition-all duration-200 hover:border-slate-700">
-          <div className="p-2.5 rounded-xl bg-indigo-500/10 text-indigo-400 border border-indigo-500/20">
+        <div className="p-4 rounded-xl bg-white border border-slate-200/90 flex items-center gap-4 shadow-sm transition-all duration-200 hover:border-slate-300">
+          <div className="p-2.5 rounded-xl bg-indigo-50 text-indigo-600 border border-indigo-100">
             <TrendingUp className="w-5 h-5" />
           </div>
           <div>
-            <div className="text-xs text-slate-400">Interview Rate</div>
-            <div className="text-xl font-bold text-slate-100">
+            <div className="text-xs text-slate-500 font-medium">Interview Rate</div>
+            <div className="text-xl font-bold text-slate-900">
               {summary?.interviewRate ?? 0}%
             </div>
           </div>
         </div>
 
-        <div className="p-4 rounded-xl bg-slate-900/60 border border-slate-800 flex items-center gap-4 shadow-sm transition-all duration-200 hover:border-slate-700">
-          <div className="p-2.5 rounded-xl bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">
+        <div className="p-4 rounded-xl bg-white border border-slate-200/90 flex items-center gap-4 shadow-sm transition-all duration-200 hover:border-slate-300">
+          <div className="p-2.5 rounded-xl bg-emerald-50 text-emerald-600 border border-emerald-100">
             <Award className="w-5 h-5" />
           </div>
           <div>
-            <div className="text-xs text-slate-400">Offer Conversion Rate</div>
-            <div className="text-xl font-bold text-emerald-400">
+            <div className="text-xs text-slate-500 font-medium">Offer Conversion Rate</div>
+            <div className="text-xl font-bold text-emerald-600">
               {summary?.offerRate ?? 0}%
             </div>
           </div>
         </div>
 
-        <div className="p-4 rounded-xl bg-slate-900/60 border border-slate-800 flex items-center gap-4 shadow-sm transition-all duration-200 hover:border-slate-700">
-          <div className="p-2.5 rounded-xl bg-purple-500/10 text-purple-400 border border-purple-500/20">
+        <div className="p-4 rounded-xl bg-white border border-slate-200/90 flex items-center gap-4 shadow-sm transition-all duration-200 hover:border-slate-300">
+          <div className="p-2.5 rounded-xl bg-purple-50 text-purple-600 border border-purple-100">
             <Percent className="w-5 h-5" />
           </div>
           <div>
-            <div className="text-xs text-slate-400">Employer Response Rate</div>
-            <div className="text-xl font-bold text-purple-400">
+            <div className="text-xs text-slate-500 font-medium">Employer Response Rate</div>
+            <div className="text-xl font-bold text-purple-600">
               {summary?.responseRate ?? 0}%
             </div>
           </div>
@@ -176,13 +176,13 @@ export const DashboardPage: React.FC = () => {
       {/* Charts Section */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
         {/* Stage Funnel Chart */}
-        <div className="p-6 rounded-2xl bg-slate-900/70 border border-slate-800 shadow-sm transition-all duration-200">
+        <div className="p-6 rounded-2xl bg-white border border-slate-200/90 shadow-sm transition-all duration-200">
           <div className="flex items-center justify-between mb-4">
             <div>
-              <h3 className="text-base font-bold text-slate-100">Applications by Stage</h3>
-              <p className="text-xs text-slate-400 mt-0.5">Distribution across pipeline stages</p>
+              <h3 className="text-base font-bold text-slate-900">Applications by Stage</h3>
+              <p className="text-xs text-slate-500 mt-0.5">Distribution across pipeline stages</p>
             </div>
-            <Link to="/analytics" className="text-xs text-indigo-400 hover:text-indigo-300 flex items-center gap-1 transition-all duration-200">
+            <Link to="/analytics" className="text-xs text-indigo-600 hover:text-indigo-700 font-medium flex items-center gap-1 transition-all duration-200">
               Details <ArrowRight className="w-3 h-3" />
             </Link>
           </div>
@@ -192,13 +192,13 @@ export const DashboardPage: React.FC = () => {
         </div>
 
         {/* Monthly Trend Chart */}
-        <div className="p-6 rounded-2xl bg-slate-900/70 border border-slate-800 shadow-sm transition-all duration-200">
+        <div className="p-6 rounded-2xl bg-white border border-slate-200/90 shadow-sm transition-all duration-200">
           <div className="flex items-center justify-between mb-4">
             <div>
-              <h3 className="text-base font-bold text-slate-100">Application Velocity</h3>
-              <p className="text-xs text-slate-400 mt-0.5">Applications sent per month</p>
+              <h3 className="text-base font-bold text-slate-900">Application Velocity</h3>
+              <p className="text-xs text-slate-500 mt-0.5">Applications sent per month</p>
             </div>
-            <Link to="/analytics" className="text-xs text-indigo-400 hover:text-indigo-300 flex items-center gap-1 transition-all duration-200">
+            <Link to="/analytics" className="text-xs text-indigo-600 hover:text-indigo-700 font-medium flex items-center gap-1 transition-all duration-200">
               Trends <ArrowRight className="w-3 h-3" />
             </Link>
           </div>
@@ -211,22 +211,22 @@ export const DashboardPage: React.FC = () => {
       {/* Upcoming Interviews & Recent Applications Row */}
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
         {/* Upcoming Interviews Box */}
-        <div className="p-6 rounded-2xl bg-slate-900/70 border border-slate-800 shadow-sm flex flex-col">
+        <div className="p-6 rounded-2xl bg-white border border-slate-200/90 shadow-sm flex flex-col">
           <div className="flex items-center justify-between mb-4">
-            <h3 className="text-base font-bold text-slate-100 flex items-center gap-2">
-              <Clock className="w-4 h-4 text-sky-400" />
+            <h3 className="text-base font-bold text-slate-900 flex items-center gap-2">
+              <Clock className="w-4 h-4 text-sky-600" />
               Upcoming Interviews
             </h3>
-            <Link to="/interviews" className="text-xs text-indigo-400 hover:text-indigo-300 transition-all duration-200">
+            <Link to="/interviews" className="text-xs text-indigo-600 hover:text-indigo-700 font-medium transition-all duration-200">
               View all
             </Link>
           </div>
 
           <div className="flex-1 space-y-3">
             {upcomingInterviews.length === 0 ? (
-              <div className="h-40 flex flex-col items-center justify-center text-center p-4 border border-dashed border-slate-800 rounded-xl">
-                <p className="text-xs text-slate-400">No interviews scheduled yet.</p>
-                <Link to="/interviews" className="mt-2 text-xs text-indigo-400 hover:underline">
+              <div className="h-40 flex flex-col items-center justify-center text-center p-4 border border-dashed border-slate-200 rounded-xl">
+                <p className="text-xs text-slate-500">No interviews scheduled yet.</p>
+                <Link to="/interviews" className="mt-2 text-xs text-indigo-600 hover:underline font-medium">
                   + Schedule a round
                 </Link>
               </div>
@@ -234,28 +234,28 @@ export const DashboardPage: React.FC = () => {
               upcomingInterviews.map((iv) => (
                 <div
                   key={iv.id}
-                  className="p-4 rounded-xl bg-slate-950/70 border border-slate-800/80 hover:border-slate-700 shadow-sm transition-all duration-200"
+                  className="p-4 rounded-xl bg-slate-50/80 border border-slate-200/80 hover:border-slate-300 shadow-sm transition-all duration-200"
                 >
                   <div className="flex items-start justify-between gap-2">
                     <div>
-                      <h4 className="text-xs font-bold text-slate-100">{iv.title}</h4>
-                      <p className="text-[11px] text-slate-400 mt-0.5">
+                      <h4 className="text-xs font-bold text-slate-900">{iv.title}</h4>
+                      <p className="text-[11px] text-slate-500 mt-0.5">
                         {iv.application?.companyName} • {iv.application?.position}
                       </p>
                     </div>
-                    <span className="text-[10px] font-semibold px-2 py-0.5 rounded-full bg-sky-500/10 text-sky-400 border border-sky-500/20">
+                    <span className="text-[10px] font-semibold px-2 py-0.5 rounded-full bg-sky-50 text-sky-700 border border-sky-200">
                       {iv.type}
                     </span>
                   </div>
 
-                  <div className="mt-2.5 flex items-center justify-between text-[11px] text-slate-400 pt-2 border-t border-slate-900">
-                    <span className="text-slate-300">{formatDateTime(iv.scheduledAt)}</span>
+                  <div className="mt-2.5 flex items-center justify-between text-[11px] text-slate-500 pt-2 border-t border-slate-200/60">
+                    <span className="text-slate-700 font-medium">{formatDateTime(iv.scheduledAt)}</span>
                     {iv.location && iv.location.startsWith('http') && (
                       <a
                         href={iv.location}
                         target="_blank"
                         rel="noreferrer"
-                        className="text-indigo-400 hover:text-indigo-300 flex items-center gap-1 font-medium transition-all duration-200"
+                        className="text-indigo-600 hover:text-indigo-700 flex items-center gap-1 font-semibold transition-all duration-200"
                       >
                         <Video className="w-3 h-3" /> Join
                       </a>
@@ -268,20 +268,20 @@ export const DashboardPage: React.FC = () => {
         </div>
 
         {/* Recent Applications Table Preview */}
-        <div className="lg:col-span-2 p-6 rounded-2xl bg-slate-900/70 border border-slate-800 shadow-sm flex flex-col">
+        <div className="lg:col-span-2 p-6 rounded-2xl bg-white border border-slate-200/90 shadow-sm flex flex-col">
           <div className="flex items-center justify-between mb-4">
             <div>
-              <h3 className="text-base font-bold text-slate-100">Recent Applications</h3>
-              <p className="text-xs text-slate-400 mt-0.5">Latest additions to your pipeline</p>
+              <h3 className="text-base font-bold text-slate-900">Recent Applications</h3>
+              <p className="text-xs text-slate-500 mt-0.5">Latest additions to your pipeline</p>
             </div>
-            <Link to="/applications" className="text-xs text-indigo-400 hover:text-indigo-300 flex items-center gap-1 transition-all duration-200">
+            <Link to="/applications" className="text-xs text-indigo-600 hover:text-indigo-700 font-medium flex items-center gap-1 transition-all duration-200">
               Open Board <ArrowRight className="w-3 h-3" />
             </Link>
           </div>
 
           <div className="overflow-x-auto flex-1">
             <table className="w-full text-left text-xs">
-              <thead className="text-slate-400 border-b border-slate-800 font-semibold uppercase tracking-wider text-[10px]">
+              <thead className="text-slate-500 border-b border-slate-200 bg-slate-50/50 font-semibold uppercase tracking-wider text-[10px]">
                 <tr>
                   <th className="py-2.5 px-3">Company & Role</th>
                   <th className="py-2.5 px-3">Stage</th>
@@ -289,7 +289,7 @@ export const DashboardPage: React.FC = () => {
                   <th className="py-2.5 px-3 text-right">Action</th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-slate-800/60">
+              <tbody className="divide-y divide-slate-100">
                 {recentApps.map((app) => (
                   <tr
                     key={app.id}
@@ -297,18 +297,18 @@ export const DashboardPage: React.FC = () => {
                       setSelectedApp(app);
                       setIsModalOpen(true);
                     }}
-                    className="hover:bg-slate-800/40 cursor-pointer transition-colors"
+                    className="hover:bg-slate-50/80 cursor-pointer transition-colors"
                   >
                     <td className="py-3 px-3">
-                      <div className="font-semibold text-slate-100">{app.companyName}</div>
-                      <div className="text-[11px] text-slate-400">{app.position}</div>
+                      <div className="font-semibold text-slate-900">{app.companyName}</div>
+                      <div className="text-[11px] text-slate-500">{app.position}</div>
                     </td>
                     <td className="py-3 px-3">
                       <Badge status={app.status} size="sm">
                         {app.status}
                       </Badge>
                     </td>
-                    <td className="py-3 px-3 text-slate-400">
+                    <td className="py-3 px-3 text-slate-500">
                       {formatDate(app.applicationDate)}
                     </td>
                     <td className="py-3 px-3 text-right">
@@ -318,7 +318,7 @@ export const DashboardPage: React.FC = () => {
                           setSelectedApp(app);
                           setIsModalOpen(true);
                         }}
-                        className="text-indigo-400 hover:text-indigo-300 font-medium"
+                        className="text-indigo-600 hover:text-indigo-700 font-semibold"
                       >
                         View
                       </button>

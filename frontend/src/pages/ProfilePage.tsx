@@ -143,25 +143,25 @@ export const ProfilePage: React.FC = () => {
   return (
     <div className="space-y-6 max-w-3xl animate-fade-in font-sans">
       {/* Page Header */}
-      <div className="pb-3 border-b border-slate-800">
-        <h1 className="text-2xl font-bold tracking-tight text-slate-100 font-outfit">
+      <div className="pb-3 border-b border-slate-200">
+        <h1 className="text-2xl font-bold tracking-tight text-slate-900 font-outfit">
           Account & Profile
         </h1>
-        <p className="text-xs sm:text-sm text-slate-400 mt-1">
+        <p className="text-xs sm:text-sm text-slate-500 mt-1">
           Manage your profile picture, personal information, and password security.
         </p>
       </div>
 
       {/* Notifications */}
       {successMsg && (
-        <div className="p-4 rounded-xl bg-emerald-500/10 border border-emerald-500/20 text-xs sm:text-sm text-emerald-300 flex items-center gap-2.5 shadow-sm transition-all duration-200">
-          <CheckCircle2 className="w-4 h-4 text-emerald-400 shrink-0" />
+        <div className="p-4 rounded-xl bg-emerald-50 border border-emerald-200 text-xs sm:text-sm text-emerald-800 flex items-center gap-2.5 shadow-sm transition-all duration-200">
+          <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0" />
           <span>{successMsg}</span>
         </div>
       )}
 
       {errorMsg && (
-        <div className="p-4 rounded-xl bg-rose-500/10 border border-rose-500/20 text-xs sm:text-sm text-rose-300 flex items-center gap-2.5 shadow-sm transition-all duration-200">
+        <div className="p-4 rounded-xl bg-rose-50 border border-rose-200 text-xs sm:text-sm text-rose-800 flex items-center gap-2.5 shadow-sm transition-all duration-200">
           <span>{errorMsg}</span>
         </div>
       )}
@@ -176,13 +176,13 @@ export const ProfilePage: React.FC = () => {
       />
 
       {/* 1. Profile Picture Card */}
-      <div className="p-6 rounded-2xl bg-slate-900/80 border border-slate-800 shadow-sm transition-all duration-200 space-y-5">
+      <div className="p-6 rounded-2xl bg-white border border-slate-200/90 shadow-sm transition-all duration-200 space-y-5">
         <div>
-          <h3 className="text-sm font-bold text-slate-100 flex items-center gap-2">
-            <Camera className="w-4 h-4 text-indigo-400" />
+          <h3 className="text-sm font-bold text-slate-900 flex items-center gap-2">
+            <Camera className="w-4 h-4 text-indigo-600" />
             Profile Picture
           </h3>
-          <p className="text-xs text-slate-400 mt-0.5">
+          <p className="text-xs text-slate-500 mt-0.5">
             Click your photo or the button to upload a new picture directly from your device.
           </p>
         </div>
@@ -191,7 +191,7 @@ export const ProfilePage: React.FC = () => {
           {/* Avatar preview */}
           <div
             onClick={handleSelectFileClick}
-            className="group relative w-24 h-24 rounded-full bg-slate-800 border-2 border-indigo-500/40 hover:border-indigo-400 cursor-pointer flex items-center justify-center overflow-hidden shadow-sm transition-all duration-200"
+            className="group relative w-24 h-24 rounded-full bg-slate-100 border-2 border-indigo-200 hover:border-indigo-400 cursor-pointer flex items-center justify-center overflow-hidden shadow-sm transition-all duration-200"
             title="Click to upload a new photo"
           >
             {avatar ? (
@@ -201,19 +201,19 @@ export const ProfilePage: React.FC = () => {
                 className="w-full h-full object-cover transition-all duration-200 group-hover:scale-105"
               />
             ) : (
-              <User className="w-10 h-10 text-indigo-400" />
+              <User className="w-10 h-10 text-indigo-500" />
             )}
 
             {/* Hover overlay */}
-            <div className="absolute inset-0 bg-slate-950/70 opacity-0 group-hover:opacity-100 flex flex-col items-center justify-center transition-all duration-200 text-slate-200">
-              <Camera className="w-5 h-5 mb-0.5 text-indigo-300" />
+            <div className="absolute inset-0 bg-slate-900/60 opacity-0 group-hover:opacity-100 flex flex-col items-center justify-center transition-all duration-200 text-white">
+              <Camera className="w-5 h-5 mb-0.5 text-indigo-200" />
               <span className="text-[10px] font-semibold">Change</span>
             </div>
 
             {/* Loading spinner */}
             {isUploadingPhoto && (
-              <div className="absolute inset-0 bg-slate-950/80 flex items-center justify-center">
-                <div className="w-6 h-6 border-2 border-indigo-500 border-t-transparent rounded-full animate-spin" />
+              <div className="absolute inset-0 bg-white/80 flex items-center justify-center">
+                <div className="w-6 h-6 border-2 border-indigo-600 border-t-transparent rounded-full animate-spin" />
               </div>
             )}
           </div>
@@ -240,7 +240,7 @@ export const ProfilePage: React.FC = () => {
                   size="sm"
                   onClick={handleRemovePhoto}
                   disabled={isUploadingPhoto}
-                  leftIcon={<Trash2 className="w-3.5 h-3.5 text-rose-400" />}
+                  leftIcon={<Trash2 className="w-3.5 h-3.5 text-rose-500" />}
                   className="shadow-sm transition-all duration-200"
                 >
                   Remove
@@ -256,13 +256,13 @@ export const ProfilePage: React.FC = () => {
 
       {/* 2. Personal Details Card (Simple & Clean) */}
       <form onSubmit={handleProfileSubmit}>
-        <div className="p-6 rounded-2xl bg-slate-900/80 border border-slate-800 shadow-sm transition-all duration-200 space-y-5">
+        <div className="p-6 rounded-2xl bg-white border border-slate-200/90 shadow-sm transition-all duration-200 space-y-5">
           <div>
-            <h3 className="text-sm font-bold text-slate-100 flex items-center gap-2">
-              <User className="w-4 h-4 text-indigo-400" />
+            <h3 className="text-sm font-bold text-slate-900 flex items-center gap-2">
+              <User className="w-4 h-4 text-indigo-600" />
               Personal Details
             </h3>
-            <p className="text-xs text-slate-400 mt-0.5">
+            <p className="text-xs text-slate-500 mt-0.5">
               Your basic account and contact information.
             </p>
           </div>
@@ -278,16 +278,16 @@ export const ProfilePage: React.FC = () => {
 
             <div>
               <div className="flex items-center justify-between mb-1.5">
-                <label className="block text-xs font-semibold uppercase tracking-wider text-slate-400">
+                <label className="block text-xs font-semibold uppercase tracking-wider text-slate-700">
                   Email Address
                 </label>
-                <span className="text-[10px] text-slate-500 font-medium">Read-only</span>
+                <span className="text-[10px] text-slate-400 font-medium">Read-only</span>
               </div>
               <input
                 type="email"
                 value={user?.email || ''}
                 disabled
-                className="w-full bg-slate-950/60 border border-slate-800 rounded-xl px-3.5 py-2.5 text-sm text-slate-400 cursor-not-allowed shadow-sm"
+                className="w-full bg-slate-50 border border-slate-200 rounded-xl px-3.5 py-2.5 text-sm text-slate-500 cursor-not-allowed shadow-sm"
               />
             </div>
           </div>
@@ -309,13 +309,13 @@ export const ProfilePage: React.FC = () => {
       {/* 3. Password Security Card (Clean & Simple) */}
       {!isChangingPassword ? (
         // Simple, clean collapsed view
-        <div className="p-6 rounded-2xl bg-slate-900/80 border border-slate-800 shadow-sm transition-all duration-200 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+        <div className="p-6 rounded-2xl bg-white border border-slate-200/90 shadow-sm transition-all duration-200 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
           <div>
-            <h3 className="text-sm font-bold text-slate-100 flex items-center gap-2">
-              <Lock className="w-4 h-4 text-indigo-400" />
+            <h3 className="text-sm font-bold text-slate-900 flex items-center gap-2">
+              <Lock className="w-4 h-4 text-indigo-600" />
               Password
             </h3>
-            <p className="text-xs text-slate-400 mt-1">
+            <p className="text-xs text-slate-500 mt-1">
               Manage your password and keep your account secure.
             </p>
           </div>
@@ -336,14 +336,14 @@ export const ProfilePage: React.FC = () => {
         </div>
       ) : (
         // Simple expanded form with Cancel & Update
-        <div className="p-6 rounded-2xl bg-slate-900/80 border border-slate-800 shadow-sm transition-all duration-200 space-y-5 animate-fade-in">
-          <div className="flex items-center justify-between pb-3 border-b border-slate-800">
+        <div className="p-6 rounded-2xl bg-white border border-slate-200/90 shadow-sm transition-all duration-200 space-y-5 animate-fade-in">
+          <div className="flex items-center justify-between pb-3 border-b border-slate-100">
             <div>
-              <h3 className="text-sm font-bold text-slate-100 flex items-center gap-2">
-                <Lock className="w-4 h-4 text-indigo-400" />
+              <h3 className="text-sm font-bold text-slate-900 flex items-center gap-2">
+                <Lock className="w-4 h-4 text-indigo-600" />
                 Change Password
               </h3>
-              <p className="text-xs text-slate-400 mt-0.5">
+              <p className="text-xs text-slate-500 mt-0.5">
                 Enter your current password and choose a new one.
               </p>
             </div>
@@ -356,7 +356,7 @@ export const ProfilePage: React.FC = () => {
                 setNewPassword('');
                 setConfirmPassword('');
               }}
-              className="text-xs text-slate-400 hover:text-slate-200 transition-all duration-200"
+              className="text-xs text-slate-500 hover:text-slate-800 transition-all duration-200"
             >
               Cancel
             </button>

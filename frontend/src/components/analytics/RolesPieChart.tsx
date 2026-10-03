@@ -39,16 +39,17 @@ export const RolesPieChart: React.FC<RolesPieChartProps> = ({ data }) => {
           </Pie>
           <Tooltip
             contentStyle={{
-              backgroundColor: '#0f172a',
-              borderColor: '#334155',
-              borderRadius: '8px',
+              backgroundColor: '#ffffff',
+              borderColor: '#e2e8f0',
+              borderRadius: '12px',
               fontSize: '12px',
-              color: '#f8fafc',
+              color: '#0f172a',
+              boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1)',
             }}
           />
           <Legend
             formatter={(value) => (
-              <span className="text-xs text-slate-300 ml-1">{value}</span>
+              <span className="text-xs text-slate-600 ml-1">{value}</span>
             )}
             wrapperStyle={{ paddingTop: '10px' }}
           />
