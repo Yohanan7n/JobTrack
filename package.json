@@ -1,0 +1,37 @@
+{
+  "name": "jobtrack-workspace",
+  "version": "1.0.0",
+  "description": "JobTrack — Full-Stack Job Application Management System",
+  "private": true,
+  "workspaces": [
+    "backend",
+    "frontend"
+  ],
+  "scripts": {
+    "dev:backend": "npm --prefix backend run dev",
+    "dev:frontend": "npm --prefix frontend run dev",
+    "dev": "concurrently -n \"BACKEND,FRONTEND\" -c \"blue,magenta\" \"npm --prefix backend run dev\" \"npm --prefix frontend run dev\"",
+    "build": "npm --prefix backend run build && npm --prefix frontend run build",
+    "prisma:generate": "npm --prefix backend run prisma:generate",
+    "prisma:push": "npm --prefix backend run prisma:push",
+    "prisma:studio": "npm --prefix backend run prisma:studio",
+    "seed": "npm --prefix backend run seed",
+    "docker:up": "docker compose up -d",
+    "docker:down": "docker compose down"
+  },
+  "devDependencies": {
+    "concurrently": "^9.1.0"
+  },
+  "keywords": [
+    "jobtrack",
+    "react",
+    "vite",
+    "typescript",
+    "express",
+    "prisma",
+    "postgresql",
+    "fullstack"
+  ],
+  "author": "JobTrack Team",
+  "license": "MIT"
+}
