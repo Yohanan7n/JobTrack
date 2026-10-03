@@ -141,24 +141,25 @@ export const ApplicationModal: React.FC<ApplicationModalProps> = ({
     switch (status) {
       case 'REJECTED':
         return (
-          <div className="p-4 rounded-2xl bg-rose-50 border border-rose-200/90 text-rose-900 shadow-sm">
+          <div className="p-3.5 sm:p-4 rounded-xl bg-rose-50 border border-rose-200/90 text-rose-900 shadow-sm">
             <div className="flex items-start gap-3">
               <div className="p-2 rounded-xl bg-rose-100 text-rose-700 shrink-0 mt-0.5">
                 <AlertCircle className="w-5 h-5" />
               </div>
               <div className="flex-1">
                 <div className="flex items-center justify-between">
-                  <span className="text-xs font-bold uppercase tracking-wider text-rose-700">
+                  <span className="text-xs font-bold uppercase tracking-wider text-rose-700 flex items-center gap-1.5">
+                    <span className="w-2 h-2 rounded-full bg-rose-500 animate-pulse" />
                     Status Notification • Rejected
                   </span>
                   <span className="text-[11px] text-rose-500 font-medium">
                     {formatDate(formData.applicationDate)}
                   </span>
                 </div>
-                <h4 className="text-sm font-bold text-rose-900 mt-0.5">
+                <h4 className="text-sm font-bold text-rose-900 mt-1">
                   Application Not Moving Forward
                 </h4>
-                <p className="text-xs text-rose-700/90 mt-1 leading-relaxed">
+                <p className="text-xs text-rose-800/90 mt-1 leading-relaxed">
                   {formData.notes ||
                     'Candidate profile was not selected for this position. Review recruiter notes below.'}
                 </p>
@@ -169,14 +170,15 @@ export const ApplicationModal: React.FC<ApplicationModalProps> = ({
 
       case 'OFFER':
         return (
-          <div className="p-4 rounded-2xl bg-emerald-50 border border-emerald-200/90 text-emerald-900 shadow-sm">
+          <div className="p-3.5 sm:p-4 rounded-xl bg-emerald-50 border border-emerald-200/90 text-emerald-900 shadow-sm">
             <div className="flex items-start gap-3">
               <div className="p-2 rounded-xl bg-emerald-100 text-emerald-700 shrink-0 mt-0.5">
                 <CheckCircle2 className="w-5 h-5" />
               </div>
               <div className="flex-1">
                 <div className="flex items-center justify-between">
-                  <span className="text-xs font-bold uppercase tracking-wider text-emerald-700">
+                  <span className="text-xs font-bold uppercase tracking-wider text-emerald-700 flex items-center gap-1.5">
+                    <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
                     Status Notification • Offer Extended 🎉
                   </span>
                   {formData.salary && (
@@ -185,10 +187,10 @@ export const ApplicationModal: React.FC<ApplicationModalProps> = ({
                     </span>
                   )}
                 </div>
-                <h4 className="text-sm font-bold text-emerald-900 mt-0.5">
+                <h4 className="text-sm font-bold text-emerald-900 mt-1">
                   Job Offer Received!
                 </h4>
-                <p className="text-xs text-emerald-700/90 mt-1 leading-relaxed">
+                <p className="text-xs text-emerald-800/90 mt-1 leading-relaxed">
                   {formData.notes ||
                     'Congratulations! An official offer has been made. Compare benefits and prepare your counter-offer if needed.'}
                 </p>
@@ -200,24 +202,25 @@ export const ApplicationModal: React.FC<ApplicationModalProps> = ({
       case 'INTERVIEW':
       case 'SCREENING':
         return (
-          <div className="p-4 rounded-2xl bg-sky-50 border border-sky-200/90 text-sky-900 shadow-sm">
+          <div className="p-3.5 sm:p-4 rounded-xl bg-sky-50 border border-sky-200/90 text-sky-900 shadow-sm">
             <div className="flex items-start gap-3">
               <div className="p-2 rounded-xl bg-sky-100 text-sky-700 shrink-0 mt-0.5">
                 <Clock className="w-5 h-5" />
               </div>
               <div className="flex-1">
                 <div className="flex items-center justify-between">
-                  <span className="text-xs font-bold uppercase tracking-wider text-sky-700">
+                  <span className="text-xs font-bold uppercase tracking-wider text-sky-700 flex items-center gap-1.5">
+                    <span className="w-2 h-2 rounded-full bg-sky-500 animate-pulse" />
                     Status Notification • Active Interview
                   </span>
                   <span className="text-[11px] text-sky-600 font-medium">
                     {initialData?.interviews?.length || 0} Round(s) scheduled
                   </span>
                 </div>
-                <h4 className="text-sm font-bold text-sky-900 mt-0.5">
+                <h4 className="text-sm font-bold text-sky-900 mt-1">
                   Interviewing in Progress
                 </h4>
-                <p className="text-xs text-sky-700/90 mt-1 leading-relaxed">
+                <p className="text-xs text-sky-800/90 mt-1 leading-relaxed">
                   {formData.notes ||
                     'Currently undergoing technical evaluations or behavioral interviews.'}
                 </p>
@@ -228,24 +231,25 @@ export const ApplicationModal: React.FC<ApplicationModalProps> = ({
 
       case 'APPLIED':
         return (
-          <div className="p-4 rounded-2xl bg-indigo-50 border border-indigo-200/90 text-indigo-900 shadow-sm">
+          <div className="p-3.5 sm:p-4 rounded-xl bg-indigo-50 border border-indigo-200/90 text-indigo-900 shadow-sm">
             <div className="flex items-start gap-3">
               <div className="p-2 rounded-xl bg-indigo-100 text-indigo-700 shrink-0 mt-0.5">
                 <Briefcase className="w-5 h-5" />
               </div>
               <div className="flex-1">
                 <div className="flex items-center justify-between">
-                  <span className="text-xs font-bold uppercase tracking-wider text-indigo-700">
+                  <span className="text-xs font-bold uppercase tracking-wider text-indigo-700 flex items-center gap-1.5">
+                    <span className="w-2 h-2 rounded-full bg-indigo-500 animate-pulse" />
                     Status Notification • Application Submitted
                   </span>
                   <span className="text-[11px] text-indigo-600 font-medium">
                     {formatDate(formData.applicationDate)}
                   </span>
                 </div>
-                <h4 className="text-sm font-bold text-indigo-900 mt-0.5">
+                <h4 className="text-sm font-bold text-indigo-900 mt-1">
                   Application Under Review
                 </h4>
-                <p className="text-xs text-indigo-700/90 mt-1 leading-relaxed">
+                <p className="text-xs text-indigo-800/90 mt-1 leading-relaxed">
                   Application logged into your pipeline. Follow up within 5-7 business days if no response.
                 </p>
               </div>
@@ -255,7 +259,7 @@ export const ApplicationModal: React.FC<ApplicationModalProps> = ({
 
       default:
         return (
-          <div className="p-4 rounded-2xl bg-slate-50 border border-slate-200 text-slate-800 shadow-sm">
+          <div className="p-3.5 rounded-xl bg-slate-50 border border-slate-200 text-slate-800 shadow-sm">
             <div className="flex items-center gap-2">
               <Info className="w-4 h-4 text-slate-500" />
               <span className="text-xs font-semibold text-slate-700">
@@ -277,11 +281,11 @@ export const ApplicationModal: React.FC<ApplicationModalProps> = ({
     >
       {/* Mode Switcher Tabs for existing application */}
       {initialData && (
-        <div className="flex items-center gap-2 pb-4 mb-4 border-b border-slate-200">
+        <div className="flex items-center gap-2 pb-3 mb-3 border-b border-slate-200">
           <button
             type="button"
             onClick={() => setActiveTab('overview')}
-            className={`px-4 py-2 rounded-xl text-xs font-semibold flex items-center gap-2 transition-all duration-200 ${
+            className={`px-3.5 py-1.5 rounded-xl text-xs font-semibold flex items-center gap-1.5 transition-all duration-200 ${
               activeTab === 'overview'
                 ? 'bg-indigo-600 text-white shadow-sm'
                 : 'bg-slate-100 text-slate-600 hover:text-slate-900 border border-slate-200'
@@ -293,7 +297,7 @@ export const ApplicationModal: React.FC<ApplicationModalProps> = ({
           <button
             type="button"
             onClick={() => setActiveTab('edit')}
-            className={`px-4 py-2 rounded-xl text-xs font-semibold flex items-center gap-2 transition-all duration-200 ${
+            className={`px-3.5 py-1.5 rounded-xl text-xs font-semibold flex items-center gap-1.5 transition-all duration-200 ${
               activeTab === 'edit'
                 ? 'bg-indigo-600 text-white shadow-sm'
                 : 'bg-slate-100 text-slate-600 hover:text-slate-900 border border-slate-200'
@@ -306,41 +310,41 @@ export const ApplicationModal: React.FC<ApplicationModalProps> = ({
       )}
 
       {error && (
-        <div className="mb-4 p-3 text-xs text-rose-700 bg-rose-50 border border-rose-200 rounded-xl font-medium">
+        <div className="mb-3 p-2.5 text-xs text-rose-700 bg-rose-50 border border-rose-200 rounded-xl font-medium">
           {error}
         </div>
       )}
 
       {/* OVERVIEW & NOTIFICATION MODE */}
       {activeTab === 'overview' && initialData ? (
-        <div className="space-y-5">
+        <div className="space-y-3.5 sm:space-y-4">
           {/* Status Notification Banner */}
           {renderStatusNotification(formData.status || 'APPLIED')}
 
           {/* Key Quick Facts Grid */}
-          <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
-            <div className="p-3 rounded-xl bg-slate-50 border border-slate-200">
+          <div className="grid grid-cols-2 sm:grid-cols-4 gap-2.5">
+            <div className="p-2.5 rounded-xl bg-slate-50 border border-slate-200">
               <span className="text-[11px] font-medium text-slate-500 block">Stage</span>
               <span className="text-xs font-bold text-slate-900 mt-0.5 block">
                 {formData.status}
               </span>
             </div>
 
-            <div className="p-3 rounded-xl bg-slate-50 border border-slate-200">
+            <div className="p-2.5 rounded-xl bg-slate-50 border border-slate-200">
               <span className="text-[11px] font-medium text-slate-500 block">Compensation</span>
               <span className="text-xs font-bold text-emerald-600 mt-0.5 block truncate">
                 {formData.salary || 'Undisclosed'}
               </span>
             </div>
 
-            <div className="p-3 rounded-xl bg-slate-50 border border-slate-200">
+            <div className="p-2.5 rounded-xl bg-slate-50 border border-slate-200">
               <span className="text-[11px] font-medium text-slate-500 block">Location</span>
               <span className="text-xs font-bold text-slate-900 mt-0.5 block truncate">
                 {formData.location || 'Remote'}
               </span>
             </div>
 
-            <div className="p-3 rounded-xl bg-slate-50 border border-slate-200">
+            <div className="p-2.5 rounded-xl bg-slate-50 border border-slate-200">
               <span className="text-[11px] font-medium text-slate-500 block">Priority</span>
               <div className="flex items-center text-amber-500 mt-0.5">
                 <Star className="w-3.5 h-3.5 fill-current" />
@@ -353,7 +357,7 @@ export const ApplicationModal: React.FC<ApplicationModalProps> = ({
 
           {/* Job Description Card */}
           {formData.jobDescription && (
-            <div className="p-4 rounded-xl bg-white border border-slate-200 shadow-sm space-y-1.5">
+            <div className="p-3 sm:p-3.5 rounded-xl bg-white border border-slate-200 shadow-sm space-y-1">
               <span className="text-xs font-bold text-slate-800 flex items-center gap-1.5 uppercase tracking-wider text-[11px]">
                 <FileText className="w-3.5 h-3.5 text-indigo-600" />
                 Role Description
@@ -365,7 +369,7 @@ export const ApplicationModal: React.FC<ApplicationModalProps> = ({
           )}
 
           {/* Notes & Feedback Card */}
-          <div className="p-4 rounded-xl bg-slate-50 border border-slate-200 space-y-1.5">
+          <div className="p-3 sm:p-3.5 rounded-xl bg-slate-50 border border-slate-200 space-y-1">
             <span className="text-xs font-bold text-slate-800 flex items-center gap-1.5 uppercase tracking-wider text-[11px]">
               <Info className="w-3.5 h-3.5 text-indigo-600" />
               Notes, Interview Feedback & Action Items

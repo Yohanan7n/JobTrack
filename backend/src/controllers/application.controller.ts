@@ -200,6 +200,16 @@ export const updateApplication = async (req: AuthenticatedRequest, res: Response
     }
 
     const updateData: any = { ...req.body };
+    // Remove relations and non-updatable metadata fields to prevent Prisma schema errors
+    delete updateData.id;
+    delete updateData.userId;
+    delete updateData.company;
+    delete updateData.interviews;
+    delete updateData.documents;
+    delete updateData.user;
+    delete updateData.createdAt;
+    delete updateData.updatedAt;
+
     if (updateData.applicationDate) {
       updateData.applicationDate = new Date(updateData.applicationDate);
     }
