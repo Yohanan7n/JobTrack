@@ -42,14 +42,14 @@ const ProtectedRoute: React.FC<{ children: React.ReactNode }> = ({ children }) =
 
 // Admin Route Guard
 const AdminRoute: React.FC<{ children: React.ReactNode }> = ({ children }) => {
-  const { isAuthenticated, isLoading } = useAuth();
+  const { user, isAuthenticated, isLoading } = useAuth();
 
   if (isLoading) {
     return null;
   }
 
-  if (!isAuthenticated) {
-    return <Navigate to="/login" replace />;
+  if (!isAuthenticated || user?.role !== 'ADMIN') {
+    return <Navigate to="/dashboard" replace />;
   }
 
   return <>{children}</>;

@@ -53,13 +53,15 @@ export const Navbar: React.FC<NavbarProps> = ({ onToggleSidebar }) => {
         <div className="flex items-center gap-3">
           {isAuthenticated ? (
             <div className="flex items-center gap-3">
-              <Link
-                to="/admin"
-                className="hidden sm:flex items-center gap-1.5 text-xs font-semibold px-2.5 py-1 rounded-full bg-purple-50 text-purple-700 border border-purple-200 hover:bg-purple-100 transition-all duration-200"
-              >
-                <Shield className="w-3.5 h-3.5" />
-                Admin Panel
-              </Link>
+              {user?.role === 'ADMIN' && (
+                <Link
+                  to="/admin"
+                  className="hidden sm:flex items-center gap-1.5 text-xs font-semibold px-2.5 py-1 rounded-full bg-purple-50 text-purple-700 border border-purple-200 hover:bg-purple-100 transition-all duration-200"
+                >
+                  <Shield className="w-3.5 h-3.5" />
+                  Admin Panel
+                </Link>
+              )}
 
               <Link
                 to="/profile"

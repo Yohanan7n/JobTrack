@@ -11,6 +11,7 @@ import {
   Shield,
   X,
 } from 'lucide-react';
+import { useAuth } from '../../hooks/useAuth';
 
 interface SidebarProps {
   isOpen: boolean;
@@ -18,6 +19,7 @@ interface SidebarProps {
 }
 
 export const Sidebar: React.FC<SidebarProps> = ({ isOpen, onClose }) => {
+  const { user } = useAuth();
 
   const navItems = [
     { to: '/dashboard', label: 'Dashboard', icon: <LayoutDashboard className="w-4 h-4" /> },
@@ -26,9 +28,16 @@ export const Sidebar: React.FC<SidebarProps> = ({ isOpen, onClose }) => {
     { to: '/interviews', label: 'Interviews', icon: <Calendar className="w-4 h-4" /> },
     { to: '/documents', label: 'Documents & CVs', icon: <FileText className="w-4 h-4" /> },
     { to: '/analytics', label: 'Analytics', icon: <BarChart3 className="w-4 h-4" /> },
-    { to: '/admin', label: 'Admin Control Center', icon: <Shield className="w-4 h-4 text-purple-400" /> },
     { to: '/profile', label: 'Profile & Settings', icon: <User className="w-4 h-4" /> },
   ];
+
+  if (user?.role === 'ADMIN') {
+    navItems.splice(6, 0, {
+      to: '/admin',
+      label: 'Admin Control Center',
+      icon: <Shield className="w-4 h-4 text-purple-400" />,
+    });
+  }
 
   return (
     <>

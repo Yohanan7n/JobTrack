@@ -7,16 +7,12 @@ export const requireAdmin = (
   res: Response,
   next: NextFunction
 ) => {
-  if (!req.user) {
+  if (!req.user || req.user.role !== 'ADMIN') {
     return errorResponse(
       res,
-      'Authentication required',
-      401
+      'Forbidden: Administrator access required',
+      403
     );
-  }
-  // In development/demo, ensure all authenticated users have access to admin controls
-  if (req.user.role !== 'ADMIN') {
-    req.user.role = 'ADMIN';
   }
   next();
 };
