@@ -86,10 +86,10 @@ export const FilterBar: React.FC<FilterBarProps> = ({
                 ? 'bg-indigo-600 text-white font-medium shadow-sm'
                 : 'text-slate-400 hover:text-slate-200'
             }`}
-            title="Kanban Board view"
+            title="Pipeline Board view"
           >
             <LayoutGrid className="w-3.5 h-3.5" />
-            <span className="hidden sm:inline">Kanban</span>
+            <span className="hidden sm:inline">Board</span>
           </button>
           <button
             onClick={() => onViewModeChange('table')}

@@ -60,7 +60,7 @@ export const LandingPage: React.FC = () => {
           </h1>
 
           <p className="mt-6 text-base sm:text-xl text-slate-400 max-w-2xl mx-auto leading-relaxed">
-            Manage your full-stack application pipeline, drag-and-drop Kanban stages, track interview rounds, and analyze response metrics — all in one centralized dashboard.
+            Manage your full-stack application pipeline, drag-and-drop stages, track interview rounds, and analyze response metrics — all in one centralized dashboard.
           </p>
 
           <div className="mt-8 flex flex-wrap items-center justify-center gap-4">
@@ -114,7 +114,7 @@ export const LandingPage: React.FC = () => {
               <div className="w-10 h-10 rounded-xl bg-indigo-500/10 text-indigo-400 border border-indigo-500/20 flex items-center justify-center mb-4">
                 <Kanban className="w-5 h-5" />
               </div>
-              <h3 className="text-base font-bold text-slate-100">Kanban Board</h3>
+              <h3 className="text-base font-bold text-slate-100">Pipeline Board</h3>
               <p className="mt-2 text-xs text-slate-400 leading-relaxed">
                 Smooth drag-and-drop workflow spanning Applied, Screening, Interview, Offer, and Rejected stages.
               </p>

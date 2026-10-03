@@ -84,7 +84,7 @@ export const DashboardPage: React.FC = () => {
         <div className="flex items-center gap-3">
           <Link to="/applications">
             <Button variant="secondary" size="sm">
-              Open Kanban
+              Open Pipeline
             </Button>
           </Link>
           <Button

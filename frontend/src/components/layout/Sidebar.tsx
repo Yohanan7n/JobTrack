@@ -23,7 +23,7 @@ export const Sidebar: React.FC<SidebarProps> = ({ isOpen, onClose }) => {
 
   const navItems = [
     { to: '/dashboard', label: 'Dashboard', icon: <LayoutDashboard className="w-4 h-4" /> },
-    { to: '/applications', label: 'Applications & Kanban', icon: <Kanban className="w-4 h-4" /> },
+    { to: '/applications', label: 'Job Pipeline', icon: <Kanban className="w-4 h-4" /> },
     { to: '/companies', label: 'Companies', icon: <Building2 className="w-4 h-4" /> },
     { to: '/interviews', label: 'Interviews', icon: <Calendar className="w-4 h-4" /> },
     { to: '/documents', label: 'Documents & CVs', icon: <FileText className="w-4 h-4" /> },
@@ -98,7 +98,7 @@ export const Sidebar: React.FC<SidebarProps> = ({ isOpen, onClose }) => {
             </span>
           </div>
           <p className="mt-1 text-[11px] text-slate-400 leading-relaxed">
-            Drag cards between columns in Kanban to instantly update application stages.
+            Drag cards between stage columns to instantly update your application status.
           </p>
         </div>
       </aside>
