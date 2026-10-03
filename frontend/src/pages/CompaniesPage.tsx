@@ -83,7 +83,7 @@ export const CompaniesPage: React.FC = () => {
           placeholder="Search by company name, industry, or location..."
           value={search}
           onChange={(e) => setSearch(e.target.value)}
-          className="w-full bg-slate-900 border border-slate-800 rounded-lg pl-9 pr-3.5 py-2 text-xs sm:text-sm text-slate-100 placeholder-slate-500 focus:outline-none focus:ring-1 focus:ring-indigo-500"
+          className="w-full bg-slate-900 border border-slate-800 rounded-xl pl-9 pr-3.5 py-2 text-xs sm:text-sm text-slate-100 placeholder-slate-500 shadow-sm transition-all duration-200 focus:outline-none focus:ring-1 focus:ring-indigo-500"
         />
       </div>
 
@@ -95,11 +95,11 @@ export const CompaniesPage: React.FC = () => {
           <p className="text-xs text-slate-500 mt-1">Add companies as you apply to positions.</p>
         </div>
       ) : (
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {companies.map((company) => (
             <div
               key={company.id}
-              className="p-5 rounded-2xl bg-slate-900/80 border border-slate-800 hover:border-indigo-500/40 transition-all flex flex-col justify-between group shadow-sm hover:shadow-md"
+              className="p-6 rounded-2xl bg-slate-900/80 border border-slate-800 hover:border-indigo-500/40 transition-all duration-200 flex flex-col justify-between group shadow-sm hover:shadow"
             >
               <div>
                 <div className="flex items-start justify-between gap-2 mb-2">
@@ -124,7 +124,7 @@ export const CompaniesPage: React.FC = () => {
                       href={company.website}
                       target="_blank"
                       rel="noreferrer"
-                      className="p-1.5 text-slate-400 hover:text-indigo-400 hover:bg-slate-800 rounded-lg transition-colors"
+                      className="p-1.5 text-slate-400 hover:text-indigo-400 hover:bg-slate-800 rounded-xl transition-all duration-200"
                       title="Visit company website"
                     >
                       <ExternalLink className="w-4 h-4" />
@@ -142,7 +142,7 @@ export const CompaniesPage: React.FC = () => {
 
                 {/* Recruiter / Contact */}
                 {(company.contactPerson || company.contactEmail) && (
-                  <div className="mt-2.5 p-2 rounded-lg bg-slate-950/60 border border-slate-800/80 text-xs text-slate-300 space-y-1">
+                  <div className="mt-2.5 p-3 rounded-xl bg-slate-950/60 border border-slate-800/80 text-xs text-slate-300 space-y-1">
                     {company.contactPerson && (
                       <div className="flex items-center gap-1.5">
                         <User className="w-3.5 h-3.5 text-slate-500" />
@@ -179,7 +179,7 @@ export const CompaniesPage: React.FC = () => {
                       setSelectedCompany(company);
                       setIsModalOpen(true);
                     }}
-                    className="text-xs text-indigo-400 hover:text-indigo-300 font-medium px-2 py-1 rounded bg-indigo-500/10 hover:bg-indigo-500/20 transition-colors"
+                    className="text-xs text-indigo-400 hover:text-indigo-300 font-medium px-2.5 py-1 rounded-xl bg-indigo-500/10 hover:bg-indigo-500/20 transition-all duration-200"
                   >
                     Edit
                   </button>

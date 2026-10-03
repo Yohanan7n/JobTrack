@@ -36,13 +36,13 @@ export const Navbar: React.FC<NavbarProps> = ({ onToggleSidebar }) => {
           )}
 
           <Link to="/" className="flex items-center gap-2.5">
-            <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-gradient-to-tr from-indigo-600 to-indigo-400 text-white shadow-lg shadow-indigo-500/20">
+            <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-gradient-to-tr from-indigo-600 to-indigo-400 text-white shadow-sm">
               <Briefcase className="h-5 w-5" />
             </div>
             <div className="flex flex-col">
               <span className="text-lg font-bold tracking-tight text-white flex items-center gap-1.5 font-outfit">
                 JobTrack
-                <span className="text-[10px] font-semibold uppercase tracking-wider px-1.5 py-0.5 rounded bg-indigo-500/20 text-indigo-400 border border-indigo-500/30">
+                <span className="text-[10px] font-semibold uppercase tracking-wider px-1.5 py-0.5 rounded-full bg-indigo-500/20 text-indigo-400 border border-indigo-500/30">
                   Pro
                 </span>
               </span>
@@ -56,7 +56,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onToggleSidebar }) => {
               {user?.role === 'ADMIN' && (
                 <Link
                   to="/admin"
-                  className="hidden sm:flex items-center gap-1.5 text-xs font-semibold px-2.5 py-1 rounded-full bg-purple-500/10 text-purple-400 border border-purple-500/30 hover:bg-purple-500/20 transition-colors"
+                  className="hidden sm:flex items-center gap-1.5 text-xs font-semibold px-2.5 py-1 rounded-full bg-purple-500/10 text-purple-400 border border-purple-500/30 hover:bg-purple-500/20 transition-all duration-200"
                 >
                   <Shield className="w-3.5 h-3.5" />
                   Admin Panel
@@ -65,7 +65,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onToggleSidebar }) => {
 
               <Link
                 to="/profile"
-                className="flex items-center gap-2 p-1.5 rounded-lg hover:bg-slate-900 border border-transparent hover:border-slate-800 transition-colors"
+                className="flex items-center gap-2 p-1.5 rounded-xl hover:bg-slate-900 border border-transparent hover:border-slate-800 transition-all duration-200"
               >
                 <div className="w-8 h-8 rounded-full bg-indigo-600/30 border border-indigo-500/40 flex items-center justify-center overflow-hidden">
                   {user?.avatar ? (
@@ -91,7 +91,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onToggleSidebar }) => {
               <button
                 onClick={handleLogout}
                 title="Log out"
-                className="p-2 text-slate-400 hover:text-rose-400 hover:bg-rose-500/10 rounded-lg transition-colors"
+                className="p-2 text-slate-400 hover:text-rose-400 hover:bg-rose-500/10 rounded-xl transition-all duration-200"
               >
                 <LogOut className="w-4 h-4" />
               </button>
@@ -100,13 +100,13 @@ export const Navbar: React.FC<NavbarProps> = ({ onToggleSidebar }) => {
             <div className="flex items-center gap-2">
               <Link
                 to="/login"
-                className="text-xs sm:text-sm font-medium text-slate-300 hover:text-white px-3 py-1.5"
+                className="text-xs sm:text-sm font-medium text-slate-300 hover:text-white px-3 py-1.5 rounded-xl transition-all duration-200"
               >
                 Sign In
               </Link>
               <Link
                 to="/register"
-                className="text-xs sm:text-sm font-medium bg-indigo-600 hover:bg-indigo-500 text-white px-3.5 py-1.5 rounded-lg shadow-sm"
+                className="text-xs sm:text-sm font-medium bg-indigo-600 hover:bg-indigo-500 text-white px-3.5 py-1.5 rounded-xl shadow-sm hover:shadow transition-all duration-200"
               >
                 Get Started
               </Link>

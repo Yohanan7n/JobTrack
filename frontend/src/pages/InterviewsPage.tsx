@@ -100,7 +100,7 @@ export const InterviewsPage: React.FC = () => {
           <button
             key={t}
             onClick={() => setTimeframe(t)}
-            className={`px-3.5 py-1.5 rounded-lg text-xs font-semibold capitalize transition-colors ${
+            className={`px-3.5 py-1.5 rounded-xl text-xs font-semibold capitalize shadow-sm transition-all duration-200 ${
               timeframe === t
                 ? 'bg-indigo-600 text-white shadow-sm'
                 : 'bg-slate-900 text-slate-400 hover:text-slate-200 border border-slate-800'
@@ -121,12 +121,12 @@ export const InterviewsPage: React.FC = () => {
           </p>
         </div>
       ) : (
-        <div className="space-y-3">
+        <div className="space-y-4">
           {interviews.map((iv) => (
             <div
               key={iv.id}
-                className="p-5 rounded-2xl bg-slate-900/80 border border-slate-800 hover:border-indigo-500/40 transition-all flex flex-col md:flex-row md:items-center justify-between gap-4"
-              >
+              className="p-6 rounded-2xl bg-slate-900/80 border border-slate-800 hover:border-indigo-500/40 shadow-sm hover:shadow transition-all duration-200 flex flex-col md:flex-row md:items-center justify-between gap-4"
+            >
                 <div className="space-y-2 flex-1">
                   <div className="flex flex-wrap items-center gap-2">
                     <span className="text-xs font-semibold px-2 py-0.5 rounded-full bg-sky-500/10 text-sky-400 border border-sky-500/20">

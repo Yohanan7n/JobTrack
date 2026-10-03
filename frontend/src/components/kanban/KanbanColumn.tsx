@@ -49,7 +49,7 @@ export const KanbanColumn: React.FC<KanbanColumnProps> = ({
         isOver
           ? 'border-indigo-500/80 bg-indigo-950/15'
           : 'border-slate-800/80'
-      } p-3.5 transition-all`}
+      } p-4 shadow-sm transition-all duration-200`}
     >
       {/* Column Header */}
       <div className="flex items-center justify-between pb-3 mb-2 border-b border-slate-800/60">
@@ -63,7 +63,7 @@ export const KanbanColumn: React.FC<KanbanColumnProps> = ({
 
         <button
           onClick={() => onAddInColumn(status)}
-          className="p-1 text-slate-400 hover:text-indigo-400 hover:bg-slate-800 rounded-lg transition-colors"
+          className="p-1.5 text-slate-400 hover:text-indigo-400 hover:bg-slate-800 rounded-xl transition-all duration-200"
           title={`Add application in ${config.label}`}
         >
           <Plus className="w-4 h-4" />

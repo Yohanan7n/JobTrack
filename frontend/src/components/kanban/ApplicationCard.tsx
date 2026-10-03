@@ -40,7 +40,7 @@ export const ApplicationCard: React.FC<ApplicationCardProps> = ({
       draggable
       onDragStart={handleDragStart}
       onClick={() => onEdit(application)}
-      className="group relative p-4 bg-slate-900/90 hover:bg-slate-900 border border-slate-800 hover:border-indigo-500/40 rounded-xl shadow-sm hover:shadow-md cursor-grab active:cursor-grabbing transition-all select-none"
+      className="group relative p-4 bg-slate-900/90 hover:bg-slate-900 border border-slate-800 hover:border-indigo-500/40 rounded-xl shadow-sm hover:shadow cursor-grab active:cursor-grabbing transition-all duration-200 select-none"
     >
       <div className="flex items-start justify-between gap-2">
         <div className="flex-1 min-w-0">
@@ -57,13 +57,13 @@ export const ApplicationCard: React.FC<ApplicationCardProps> = ({
         <div className="relative" onClick={(e) => e.stopPropagation()}>
           <button
             onClick={() => setShowMenu(!showMenu)}
-            className="p-1 text-slate-400 hover:text-slate-200 hover:bg-slate-800 rounded-md transition-colors"
+            className="p-1.5 text-slate-400 hover:text-slate-200 hover:bg-slate-800 rounded-xl transition-all duration-200"
           >
             <MoreVertical className="w-4 h-4" />
           </button>
 
           {showMenu && (
-            <div className="absolute right-0 top-7 z-20 w-44 bg-slate-900 border border-slate-800 rounded-lg shadow-xl py-1 text-xs text-slate-300 animate-fade-in">
+            <div className="absolute right-0 top-7 z-20 w-44 bg-slate-900 border border-slate-800 rounded-xl shadow-sm py-1 text-xs text-slate-300 animate-fade-in">
               <div className="px-3 py-1.5 font-semibold text-[10px] uppercase text-slate-500 border-b border-slate-800">
                 Move Stage
               </div>

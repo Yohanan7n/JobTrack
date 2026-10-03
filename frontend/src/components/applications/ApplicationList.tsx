@@ -24,7 +24,7 @@ export const ApplicationList: React.FC<ApplicationListProps> = ({
   }
 
   return (
-    <div className="overflow-x-auto rounded-xl border border-slate-800 bg-slate-900/60">
+    <div className="overflow-x-auto rounded-2xl border border-slate-800 bg-slate-900/60 shadow-sm">
       <table className="w-full text-left text-xs sm:text-sm">
         <thead className="bg-slate-950/70 text-slate-400 font-semibold border-b border-slate-800 uppercase tracking-wider text-[11px]">
           <tr>
@@ -42,7 +42,7 @@ export const ApplicationList: React.FC<ApplicationListProps> = ({
             <tr
               key={app.id}
               onClick={() => onEdit(app)}
-              className="hover:bg-slate-800/40 cursor-pointer transition-colors"
+              className="hover:bg-slate-800/40 cursor-pointer transition-all duration-200"
             >
               <td className="py-3.5 px-4">
                 <div>
@@ -54,7 +54,7 @@ export const ApplicationList: React.FC<ApplicationListProps> = ({
                         target="_blank"
                         rel="noreferrer"
                         onClick={(e) => e.stopPropagation()}
-                        className="text-slate-500 hover:text-indigo-400 inline-flex"
+                        className="text-slate-500 hover:text-indigo-400 inline-flex transition-all duration-200"
                       >
                         <ExternalLink className="w-3 h-3" />
                       </a>
@@ -105,7 +105,7 @@ export const ApplicationList: React.FC<ApplicationListProps> = ({
                   {app.interviews && app.interviews.length > 0 && (
                     <span
                       title="Interviews scheduled"
-                      className="p-1 rounded bg-sky-500/10 text-sky-400 text-xs flex items-center gap-1 px-1.5"
+                      className="p-1 rounded-full bg-sky-500/10 text-sky-400 text-xs flex items-center gap-1 px-2"
                     >
                       <CalendarCheck className="w-3 h-3" />
                       {app.interviews.length}
@@ -116,7 +116,7 @@ export const ApplicationList: React.FC<ApplicationListProps> = ({
                       e.stopPropagation();
                       onEdit(app);
                     }}
-                    className="text-xs text-indigo-400 hover:text-indigo-300 px-2 py-1 rounded bg-indigo-500/10 hover:bg-indigo-500/20 transition-colors"
+                    className="text-xs text-indigo-400 hover:text-indigo-300 px-2.5 py-1 rounded-xl bg-indigo-500/10 hover:bg-indigo-500/20 transition-all duration-200"
                   >
                     View / Edit
                   </button>

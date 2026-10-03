@@ -40,7 +40,7 @@ export const FilterBar: React.FC<FilterBarProps> = ({
             placeholder="Search company, title, or location..."
             value={search}
             onChange={(e) => onSearchChange(e.target.value)}
-            className="w-full bg-slate-950 border border-slate-800 rounded-lg pl-9 pr-3 py-1.5 text-xs sm:text-sm text-slate-100 placeholder-slate-500 focus:outline-none focus:ring-1 focus:ring-indigo-500 focus:border-indigo-500"
+            className="w-full bg-slate-950 border border-slate-800 rounded-xl pl-9 pr-3 py-1.5 text-xs sm:text-sm text-slate-100 placeholder-slate-500 shadow-sm transition-all duration-200 focus:outline-none focus:ring-1 focus:ring-indigo-500 focus:border-indigo-500"
           />
         </div>
 
@@ -50,7 +50,7 @@ export const FilterBar: React.FC<FilterBarProps> = ({
           <select
             value={statusFilter}
             onChange={(e) => onStatusFilterChange(e.target.value)}
-            className="bg-slate-950 border border-slate-800 rounded-lg px-2.5 py-1.5 text-xs text-slate-300 focus:outline-none focus:ring-1 focus:ring-indigo-500"
+            className="bg-slate-950 border border-slate-800 rounded-xl px-2.5 py-1.5 text-xs text-slate-300 shadow-sm transition-all duration-200 focus:outline-none focus:ring-1 focus:ring-indigo-500"
           >
             <option value="ALL">All Stages ({totalCount})</option>
             {KANBAN_STAGES.map((s) => (
@@ -65,7 +65,7 @@ export const FilterBar: React.FC<FilterBarProps> = ({
         <select
           value={locationFilter}
           onChange={(e) => onLocationFilterChange(e.target.value)}
-          className="bg-slate-950 border border-slate-800 rounded-lg px-2.5 py-1.5 text-xs text-slate-300 focus:outline-none focus:ring-1 focus:ring-indigo-500"
+          className="bg-slate-950 border border-slate-800 rounded-xl px-2.5 py-1.5 text-xs text-slate-300 shadow-sm transition-all duration-200 focus:outline-none focus:ring-1 focus:ring-indigo-500"
         >
           <option value="ALL">All Locations</option>
           {LOCATION_TYPES.map((lt) => (
@@ -78,10 +78,10 @@ export const FilterBar: React.FC<FilterBarProps> = ({
 
       {/* Right side: View Toggle & Add Button */}
       <div className="flex items-center justify-between md:justify-end gap-2 border-t md:border-t-0 pt-2 md:pt-0 border-slate-800">
-        <div className="flex items-center bg-slate-950 p-1 rounded-lg border border-slate-800">
+        <div className="flex items-center bg-slate-950 p-1 rounded-xl border border-slate-800">
           <button
             onClick={() => onViewModeChange('kanban')}
-            className={`p-1.5 rounded-md text-xs flex items-center gap-1 transition-colors ${
+            className={`p-1.5 rounded-lg text-xs flex items-center gap-1 transition-all duration-200 ${
               viewMode === 'kanban'
                 ? 'bg-indigo-600 text-white font-medium shadow-sm'
                 : 'text-slate-400 hover:text-slate-200'
@@ -93,7 +93,7 @@ export const FilterBar: React.FC<FilterBarProps> = ({
           </button>
           <button
             onClick={() => onViewModeChange('table')}
-            className={`p-1.5 rounded-md text-xs flex items-center gap-1 transition-colors ${
+            className={`p-1.5 rounded-lg text-xs flex items-center gap-1 transition-all duration-200 ${
               viewMode === 'table'
                 ? 'bg-indigo-600 text-white font-medium shadow-sm'
                 : 'text-slate-400 hover:text-slate-200'

@@ -102,7 +102,7 @@ export const DashboardPage: React.FC = () => {
       </div>
 
       {/* Primary KPI Metrics Grid */}
-      <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
         <StatCard
           title="Total Applications"
           value={summary?.totalApplications ?? 0}
@@ -135,9 +135,9 @@ export const DashboardPage: React.FC = () => {
       </div>
 
       {/* Secondary Metrics Bar */}
-      <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-        <div className="p-4 rounded-xl bg-slate-900/60 border border-slate-800 flex items-center gap-3">
-          <div className="p-2.5 rounded-lg bg-indigo-500/10 text-indigo-400 border border-indigo-500/20">
+      <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
+        <div className="p-4 rounded-xl bg-slate-900/60 border border-slate-800 flex items-center gap-4 shadow-sm transition-all duration-200 hover:border-slate-700">
+          <div className="p-2.5 rounded-xl bg-indigo-500/10 text-indigo-400 border border-indigo-500/20">
             <TrendingUp className="w-5 h-5" />
           </div>
           <div>
@@ -148,8 +148,8 @@ export const DashboardPage: React.FC = () => {
           </div>
         </div>
 
-        <div className="p-4 rounded-xl bg-slate-900/60 border border-slate-800 flex items-center gap-3">
-          <div className="p-2.5 rounded-lg bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">
+        <div className="p-4 rounded-xl bg-slate-900/60 border border-slate-800 flex items-center gap-4 shadow-sm transition-all duration-200 hover:border-slate-700">
+          <div className="p-2.5 rounded-xl bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">
             <Award className="w-5 h-5" />
           </div>
           <div>
@@ -160,8 +160,8 @@ export const DashboardPage: React.FC = () => {
           </div>
         </div>
 
-        <div className="p-4 rounded-xl bg-slate-900/60 border border-slate-800 flex items-center gap-3">
-          <div className="p-2.5 rounded-lg bg-purple-500/10 text-purple-400 border border-purple-500/20">
+        <div className="p-4 rounded-xl bg-slate-900/60 border border-slate-800 flex items-center gap-4 shadow-sm transition-all duration-200 hover:border-slate-700">
+          <div className="p-2.5 rounded-xl bg-purple-500/10 text-purple-400 border border-purple-500/20">
             <Percent className="w-5 h-5" />
           </div>
           <div>
@@ -176,13 +176,13 @@ export const DashboardPage: React.FC = () => {
       {/* Charts Section */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
         {/* Stage Funnel Chart */}
-        <div className="p-5 rounded-2xl bg-slate-900/70 border border-slate-800">
+        <div className="p-6 rounded-2xl bg-slate-900/70 border border-slate-800 shadow-sm transition-all duration-200">
           <div className="flex items-center justify-between mb-4">
             <div>
               <h3 className="text-base font-bold text-slate-100">Applications by Stage</h3>
               <p className="text-xs text-slate-400 mt-0.5">Distribution across pipeline stages</p>
             </div>
-            <Link to="/analytics" className="text-xs text-indigo-400 hover:text-indigo-300 flex items-center gap-1">
+            <Link to="/analytics" className="text-xs text-indigo-400 hover:text-indigo-300 flex items-center gap-1 transition-all duration-200">
               Details <ArrowRight className="w-3 h-3" />
             </Link>
           </div>
@@ -192,13 +192,13 @@ export const DashboardPage: React.FC = () => {
         </div>
 
         {/* Monthly Trend Chart */}
-        <div className="p-5 rounded-2xl bg-slate-900/70 border border-slate-800">
+        <div className="p-6 rounded-2xl bg-slate-900/70 border border-slate-800 shadow-sm transition-all duration-200">
           <div className="flex items-center justify-between mb-4">
             <div>
               <h3 className="text-base font-bold text-slate-100">Application Velocity</h3>
               <p className="text-xs text-slate-400 mt-0.5">Applications sent per month</p>
             </div>
-            <Link to="/analytics" className="text-xs text-indigo-400 hover:text-indigo-300 flex items-center gap-1">
+            <Link to="/analytics" className="text-xs text-indigo-400 hover:text-indigo-300 flex items-center gap-1 transition-all duration-200">
               Trends <ArrowRight className="w-3 h-3" />
             </Link>
           </div>
@@ -211,13 +211,13 @@ export const DashboardPage: React.FC = () => {
       {/* Upcoming Interviews & Recent Applications Row */}
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
         {/* Upcoming Interviews Box */}
-        <div className="p-5 rounded-2xl bg-slate-900/70 border border-slate-800 flex flex-col">
+        <div className="p-6 rounded-2xl bg-slate-900/70 border border-slate-800 shadow-sm flex flex-col">
           <div className="flex items-center justify-between mb-4">
             <h3 className="text-base font-bold text-slate-100 flex items-center gap-2">
               <Clock className="w-4 h-4 text-sky-400" />
               Upcoming Interviews
             </h3>
-            <Link to="/interviews" className="text-xs text-indigo-400 hover:text-indigo-300">
+            <Link to="/interviews" className="text-xs text-indigo-400 hover:text-indigo-300 transition-all duration-200">
               View all
             </Link>
           </div>
@@ -234,7 +234,7 @@ export const DashboardPage: React.FC = () => {
               upcomingInterviews.map((iv) => (
                 <div
                   key={iv.id}
-                  className="p-3 rounded-xl bg-slate-950/70 border border-slate-800/80 hover:border-slate-700 transition-colors"
+                  className="p-4 rounded-xl bg-slate-950/70 border border-slate-800/80 hover:border-slate-700 shadow-sm transition-all duration-200"
                 >
                   <div className="flex items-start justify-between gap-2">
                     <div>
@@ -243,7 +243,7 @@ export const DashboardPage: React.FC = () => {
                         {iv.application?.companyName} • {iv.application?.position}
                       </p>
                     </div>
-                    <span className="text-[10px] font-semibold px-2 py-0.5 rounded bg-sky-500/10 text-sky-400 border border-sky-500/20">
+                    <span className="text-[10px] font-semibold px-2 py-0.5 rounded-full bg-sky-500/10 text-sky-400 border border-sky-500/20">
                       {iv.type}
                     </span>
                   </div>
@@ -255,7 +255,7 @@ export const DashboardPage: React.FC = () => {
                         href={iv.location}
                         target="_blank"
                         rel="noreferrer"
-                        className="text-indigo-400 hover:text-indigo-300 flex items-center gap-1 font-medium"
+                        className="text-indigo-400 hover:text-indigo-300 flex items-center gap-1 font-medium transition-all duration-200"
                       >
                         <Video className="w-3 h-3" /> Join
                       </a>
@@ -268,13 +268,13 @@ export const DashboardPage: React.FC = () => {
         </div>
 
         {/* Recent Applications Table Preview */}
-        <div className="lg:col-span-2 p-5 rounded-2xl bg-slate-900/70 border border-slate-800 flex flex-col">
+        <div className="lg:col-span-2 p-6 rounded-2xl bg-slate-900/70 border border-slate-800 shadow-sm flex flex-col">
           <div className="flex items-center justify-between mb-4">
             <div>
               <h3 className="text-base font-bold text-slate-100">Recent Applications</h3>
               <p className="text-xs text-slate-400 mt-0.5">Latest additions to your pipeline</p>
             </div>
-            <Link to="/applications" className="text-xs text-indigo-400 hover:text-indigo-300 flex items-center gap-1">
+            <Link to="/applications" className="text-xs text-indigo-400 hover:text-indigo-300 flex items-center gap-1 transition-all duration-200">
               Open Board <ArrowRight className="w-3 h-3" />
             </Link>
           </div>

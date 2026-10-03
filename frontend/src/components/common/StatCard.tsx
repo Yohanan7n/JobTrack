@@ -57,13 +57,13 @@ export const StatCard: React.FC<StatCardProps> = ({
 
   return (
     <div
-      className={`group relative p-5 bg-slate-900/80 border border-slate-800 rounded-xl transition-all duration-200 ${currentScheme.border} ${currentScheme.glow}`}
+      className={`group relative p-6 bg-slate-900/80 border border-slate-800 rounded-2xl shadow-sm hover:shadow transition-all duration-200 ${currentScheme.border} ${currentScheme.glow}`}
     >
       <div className="flex items-center justify-between">
         <span className="text-xs font-medium uppercase tracking-wider text-slate-400">
           {title}
         </span>
-        <div className={`p-2.5 rounded-lg ${currentScheme.iconBg}`}>{icon}</div>
+        <div className={`p-2.5 rounded-xl ${currentScheme.iconBg}`}>{icon}</div>
       </div>
 
       <div className="mt-4 flex items-baseline gap-2">
