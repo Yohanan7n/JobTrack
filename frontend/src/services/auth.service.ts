@@ -13,6 +13,11 @@ export const authService = {
   updateProfile: (data: { name?: string; avatar?: string; currentPassword?: string; newPassword?: string }) =>
     api.put('/auth/profile', data),
 
+  uploadAvatar: (formData: FormData) =>
+    api.post('/auth/avatar', formData, {
+      headers: { 'Content-Type': 'multipart/form-data' },
+    }),
+
   forgotPassword: (email: string) =>
     api.post('/auth/forgot-password', { email }),
 };

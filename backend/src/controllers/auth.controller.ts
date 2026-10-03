@@ -175,7 +175,7 @@ export const updateProfile = async (req: AuthenticatedRequest, res: Response, ne
 export const forgotPassword = async (req: AuthenticatedRequest, res: Response, next: NextFunction) => {
   try {
     const { email } = req.body;
-    const user = await prisma.user.findUnique({
+    await prisma.user.findUnique({
       where: { email: email.toLowerCase() },
     });
 
@@ -185,6 +185,37 @@ export const forgotPassword = async (req: AuthenticatedRequest, res: Response, n
       null,
       'If an account exists with that email, a password reset link has been dispatched.'
     );
+  } catch (error) {
+    next(error);
+  }
+};
+
+export const uploadAvatar = async (req: AuthenticatedRequest, res: Response, next: NextFunction) => {
+  try {
+    const userId = req.user!.id;
+    const file = req.file;
+
+    if (!file) {
+      return errorResponse(res, 'No image file uploaded', 400);
+    }
+
+    const avatarUrl = `/uploads/${file.filename}`;
+
+    const updatedUser = await prisma.user.update({
+      where: { id: userId },
+      data: { avatar: avatarUrl },
+      select: {
+        id: true,
+        name: true,
+        email: true,
+        role: true,
+        status: true,
+        avatar: true,
+        updatedAt: true,
+      },
+    });
+
+    return successResponse(res, updatedUser, 'Profile picture updated successfully');
   } catch (error) {
     next(error);
   }
