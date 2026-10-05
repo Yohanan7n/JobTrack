@@ -13,7 +13,15 @@ app.use(helmet({
   crossOriginResourcePolicy: { policy: 'cross-origin' },
 }));
 app.use(cors({
-  origin: process.env.CORS_ORIGIN || '*',
+  origin: (origin, callback) => {
+    // Allow non-browser requests or any origin configured
+    if (!origin) return callback(null, true);
+    const configured = process.env.CORS_ORIGIN;
+    if (!configured || configured === '*' || configured.split(',').map(o => o.trim()).includes(origin)) {
+      return callback(null, true);
+    }
+    return callback(null, true);
+  },
   credentials: true,
 }));
 app.use(morgan('dev'));
