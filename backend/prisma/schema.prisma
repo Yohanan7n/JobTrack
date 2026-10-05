@@ -12,16 +12,23 @@ model User {
   name         String
   email        String        @unique
   password     String
-  role         String        @default("USER") // USER or ADMIN
-  status       String        @default("ACTIVE") // ACTIVE or SUSPENDED
-  avatar       String?
-  createdAt    DateTime      @default(now())
-  updatedAt    DateTime      @updatedAt
+  role          String        @default("USER") // USER or ADMIN
+  status        String        @default("ACTIVE") // ACTIVE or SUSPENDED
+  activePersona String        @default("JOB_SEEKER") // JOB_SEEKER, EMPLOYER, FREELANCER
+  title         String?       // e.g. "Senior Full-Stack Engineer"
+  bio           String?
+  skills        String?       // Comma-separated or JSON list of skills
+  hourlyRate    Float?        // For freelance / contract rates
+  companyName   String?       // For employers
+  avatar        String?
+  createdAt     DateTime      @default(now())
+  updatedAt     DateTime      @updatedAt
 
-  applications Application[]
-  companies    Company[]
-  interviews   Interview[]
-  documents    Document[]
+  applications  Application[]
+  companies     Company[]
+  interviews    Interview[]
+  documents     Document[]
+  jobPostings   JobPosting[]
 }
 
 model Company {
@@ -49,6 +56,8 @@ model Application {
   user           User        @relation(fields: [userId], references: [id], onDelete: Cascade)
   companyId      String?
   company        Company?    @relation(fields: [companyId], references: [id], onDelete: SetNull)
+  jobPostingId   String?
+  jobPosting     JobPosting? @relation(fields: [jobPostingId], references: [id], onDelete: SetNull)
   companyName    String
   position       String
   location       String?
@@ -71,6 +80,7 @@ model Application {
   documents      Document[]
 
   @@index([userId, status])
+  @@index([jobPostingId])
 }
 
 model Interview {
@@ -108,4 +118,27 @@ model Document {
   updatedAt     DateTime     @updatedAt
 
   @@index([userId])
+}
+
+model JobPosting {
+  id             String        @id @default(cuid())
+  employerId     String
+  employer       User          @relation(fields: [employerId], references: [id], onDelete: Cascade)
+  title          String
+  companyName    String
+  location       String?
+  locationType   String        @default("REMOTE") // REMOTE, HYBRID, ONSITE
+  employmentType String        @default("FULL_TIME") // FULL_TIME, PART_TIME, CONTRACT, FREELANCE, INTERNSHIP
+  salaryRange    String?
+  description    String
+  requirements   String?
+  skills         String?       // Comma-separated required skills
+  status         String        @default("OPEN") // OPEN, PAUSED, CLOSED
+  createdAt      DateTime      @default(now())
+  updatedAt      DateTime      @updatedAt
+
+  applications   Application[]
+
+  @@index([employerId])
+  @@index([status])
 }

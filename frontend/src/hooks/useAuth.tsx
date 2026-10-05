@@ -10,6 +10,7 @@ interface AuthContextType {
   login: (token: string, user: User) => void;
   logout: () => void;
   updateUser: (user: Partial<User>) => void;
+  switchPersona: (persona: 'JOB_SEEKER' | 'EMPLOYER' | 'FREELANCER') => Promise<void>;
 }
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
@@ -64,6 +65,21 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     }
   };
 
+  const switchPersona = async (persona: 'JOB_SEEKER' | 'EMPLOYER' | 'FREELANCER') => {
+    try {
+      const res = await authService.switchPersona(persona);
+      if (res.data?.data) {
+        setUser(res.data.data);
+        if (token) setStoredAuth(token, res.data.data);
+      }
+    } catch (err) {
+      console.error('Failed to switch persona:', err);
+      if (user) {
+        updateUser({ activePersona: persona });
+      }
+    }
+  };
+
   return (
     <AuthContext.Provider
       value={{
@@ -74,6 +90,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
         login,
         logout,
         updateUser,
+        switchPersona,
       }}
     >
       {children}

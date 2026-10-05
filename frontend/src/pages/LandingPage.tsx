@@ -51,16 +51,16 @@ export const LandingPage: React.FC = () => {
 
         <div className="max-w-5xl mx-auto px-4 sm:px-6 text-center relative z-10">
           <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-indigo-500/10 border border-indigo-500/25 text-indigo-400 text-xs font-semibold uppercase tracking-wider mb-6 animate-fade-in">
-            <Sparkles className="w-3.5 h-3.5" />
-            The Modern Job Search Operating System
+            <Sparkles className="w-3.5 h-3.5 text-amber-400" />
+            Jobs, Freelance & Talent Marketplace
           </div>
 
           <h1 className="text-4xl sm:text-6xl md:text-7xl font-extrabold tracking-tight text-slate-100 max-w-4xl mx-auto leading-[1.1] font-outfit">
-            Master your job hunt with <span className="gradient-text">JobTrack</span>
+            Find work or hire talent with <span className="gradient-text">WorkHub</span>
           </h1>
 
           <p className="mt-6 text-base sm:text-xl text-slate-400 max-w-2xl mx-auto leading-relaxed">
-            Manage your full-stack application pipeline, drag-and-drop stages, track interview rounds, and analyze response metrics — all in one centralized dashboard.
+            The all-in-one platform for job seekers, freelancers, and hiring teams. Discover verified jobs, post vacancies, manage candidate pipelines, and track applications in real time.
           </p>
 
           <div className="mt-8 flex flex-wrap items-center justify-center gap-4">

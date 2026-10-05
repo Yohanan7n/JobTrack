@@ -10,6 +10,10 @@ import {
   User,
   Shield,
   X,
+  Briefcase,
+  Users,
+  Plus,
+  Sparkles,
 } from 'lucide-react';
 import { useAuth } from '../../hooks/useAuth';
 
@@ -20,19 +24,31 @@ interface SidebarProps {
 
 export const Sidebar: React.FC<SidebarProps> = ({ isOpen, onClose }) => {
   const { user } = useAuth();
+  const isEmployer = user?.activePersona === 'EMPLOYER';
 
-  const navItems = [
-    { to: '/dashboard', label: 'Dashboard', icon: <LayoutDashboard className="w-4 h-4" /> },
-    { to: '/applications', label: 'Job Pipeline', icon: <Kanban className="w-4 h-4" /> },
-    { to: '/companies', label: 'Companies', icon: <Building2 className="w-4 h-4" /> },
-    { to: '/interviews', label: 'Interviews', icon: <Calendar className="w-4 h-4" /> },
-    { to: '/documents', label: 'Documents & CVs', icon: <FileText className="w-4 h-4" /> },
-    { to: '/analytics', label: 'Analytics', icon: <BarChart3 className="w-4 h-4" /> },
-    { to: '/profile', label: 'Profile & Settings', icon: <User className="w-4 h-4" /> },
-  ];
+  const navItems = isEmployer
+    ? [
+        { to: '/employer', label: 'Employer Dashboard', icon: <Building2 className="w-4 h-4 text-purple-400" /> },
+        { to: '/employer/post-job', label: 'Post a New Job', icon: <Plus className="w-4 h-4 text-indigo-400" /> },
+        { to: '/employer/candidates', label: 'Candidate Pipeline', icon: <Users className="w-4 h-4" /> },
+        { to: '/employer/talent', label: 'Browse Freelancers', icon: <Sparkles className="w-4 h-4 text-amber-400" /> },
+        { to: '/jobs', label: 'Marketplace Feed', icon: <Briefcase className="w-4 h-4" /> },
+        { to: '/companies', label: 'Companies & Partners', icon: <Building2 className="w-4 h-4" /> },
+        { to: '/profile', label: 'Company Profile', icon: <User className="w-4 h-4" /> },
+      ]
+    : [
+        { to: '/dashboard', label: 'Dashboard', icon: <LayoutDashboard className="w-4 h-4" /> },
+        { to: '/jobs', label: 'Find Jobs & Gigs', icon: <Briefcase className="w-4 h-4 text-amber-400" /> },
+        { to: '/applications', label: 'Job Pipeline', icon: <Kanban className="w-4 h-4" /> },
+        { to: '/companies', label: 'Target Companies', icon: <Building2 className="w-4 h-4" /> },
+        { to: '/interviews', label: 'Interviews', icon: <Calendar className="w-4 h-4" /> },
+        { to: '/documents', label: 'Documents & CVs', icon: <FileText className="w-4 h-4" /> },
+        { to: '/analytics', label: 'Analytics', icon: <BarChart3 className="w-4 h-4" /> },
+        { to: '/profile', label: 'Profile & Settings', icon: <User className="w-4 h-4" /> },
+      ];
 
   if (user?.role === 'ADMIN') {
-    navItems.splice(6, 0, {
+    navItems.push({
       to: '/admin',
       label: 'Admin Control Center',
       icon: <Shield className="w-4 h-4 text-purple-400" />,
@@ -56,7 +72,7 @@ export const Sidebar: React.FC<SidebarProps> = ({ isOpen, onClose }) => {
         }`}
       >
         <div className="flex items-center justify-between pb-4 mb-4 border-b border-slate-800 lg:hidden">
-          <span className="font-bold text-white">JobTrack Menu</span>
+          <span className="font-bold text-white font-outfit">WorkHub Menu</span>
           <button
             onClick={onClose}
             className="p-1.5 text-slate-400 hover:text-white rounded-xl hover:bg-slate-800 transition-all duration-200"
@@ -66,7 +82,7 @@ export const Sidebar: React.FC<SidebarProps> = ({ isOpen, onClose }) => {
         </div>
 
         <div className="text-[11px] font-semibold uppercase tracking-wider text-slate-400 px-3 mb-2">
-          Navigation
+          {isEmployer ? 'Employer Portal' : 'Job Seeker Workspace'}
         </div>
 
         <nav className="flex-1 space-y-1">
@@ -92,13 +108,17 @@ export const Sidebar: React.FC<SidebarProps> = ({ isOpen, onClose }) => {
         {/* Quick summary box in dark navy sidebar */}
         <div className="p-3.5 mt-auto rounded-xl bg-slate-900/80 border border-slate-800/90 shadow-sm">
           <div className="flex items-center justify-between">
-            <span className="text-xs font-semibold text-slate-200">Quick Help</span>
+            <span className="text-xs font-semibold text-slate-200">
+              {isEmployer ? 'Employer Mode' : 'Job Seeker Mode'}
+            </span>
             <span className="text-[10px] font-medium text-emerald-400 bg-emerald-500/10 px-1.5 py-0.5 rounded border border-emerald-500/20">
-              Live
+              Active
             </span>
           </div>
           <p className="mt-1 text-[11px] text-slate-400 leading-relaxed">
-            Drag cards between stage columns to instantly update your application status.
+            {isEmployer
+              ? 'Post open vacancies and review incoming candidate applications in real time.'
+              : 'Apply to jobs in the marketplace and track your progress across Kanban stages.'}
           </p>
         </div>
       </aside>

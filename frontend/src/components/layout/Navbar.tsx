@@ -9,6 +9,10 @@ import {
   Menu,
   Bell,
   X,
+  ChevronDown,
+  Sparkles,
+  UserCheck,
+  Building2,
 } from 'lucide-react';
 
 interface NavbarProps {
@@ -16,20 +20,23 @@ interface NavbarProps {
 }
 
 export const Navbar: React.FC<NavbarProps> = ({ onToggleSidebar }) => {
-  const { user, logout, isAuthenticated } = useAuth();
+  const { user, logout, isAuthenticated, switchPersona } = useAuth();
   const [isNotificationOpen, setIsNotificationOpen] = useState(false);
+  const [isPersonaOpen, setIsPersonaOpen] = useState(false);
   const notificationRef = useRef<HTMLDivElement>(null);
+  const personaRef = useRef<HTMLDivElement>(null);
   const navigate = useNavigate();
   const location = useLocation();
 
-  // Close notification dropdown whenever the user navigates
+  // Close notification & persona dropdowns whenever the user navigates
   useEffect(() => {
     setIsNotificationOpen(false);
+    setIsPersonaOpen(false);
   }, [location.pathname]);
 
-  // Close notification dropdown when clicking outside or pressing Escape
+  // Close dropdowns when clicking outside or pressing Escape
   useEffect(() => {
-    if (!isNotificationOpen) return;
+    if (!isNotificationOpen && !isPersonaOpen) return;
 
     const handleClickOutside = (event: MouseEvent) => {
       if (
@@ -38,15 +45,21 @@ export const Navbar: React.FC<NavbarProps> = ({ onToggleSidebar }) => {
       ) {
         setIsNotificationOpen(false);
       }
+      if (
+        personaRef.current &&
+        !personaRef.current.contains(event.target as Node)
+      ) {
+        setIsPersonaOpen(false);
+      }
     };
 
     const handleKeyDown = (event: KeyboardEvent) => {
       if (event.key === 'Escape') {
         setIsNotificationOpen(false);
+        setIsPersonaOpen(false);
       }
     };
 
-    // Use capture or bubble mousedown so clicks on other buttons close it immediately
     document.addEventListener('mousedown', handleClickOutside);
     document.addEventListener('keydown', handleKeyDown);
 
@@ -54,7 +67,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onToggleSidebar }) => {
       document.removeEventListener('mousedown', handleClickOutside);
       document.removeEventListener('keydown', handleKeyDown);
     };
-  }, [isNotificationOpen]);
+  }, [isNotificationOpen, isPersonaOpen]);
 
   const handleLogout = () => {
     logout();
@@ -75,14 +88,14 @@ export const Navbar: React.FC<NavbarProps> = ({ onToggleSidebar }) => {
           )}
 
           <Link to="/" className="flex items-center gap-2.5">
-            <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-gradient-to-tr from-indigo-600 to-purple-600 text-white shadow-sm">
+            <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-gradient-to-tr from-indigo-600 via-indigo-600 to-purple-600 text-white shadow-sm">
               <Briefcase className="h-5 w-5" />
             </div>
             <div className="flex flex-col">
               <span className="text-lg font-bold tracking-tight text-slate-900 flex items-center gap-1.5 font-outfit">
-                JobTrack
+                Work<span className="text-indigo-600">Hub</span>
                 <span className="text-[10px] font-semibold uppercase tracking-wider px-1.5 py-0.5 rounded-full bg-indigo-50 text-indigo-700 border border-indigo-200">
-                  Pro
+                  Marketplace
                 </span>
               </span>
             </div>
@@ -92,6 +105,140 @@ export const Navbar: React.FC<NavbarProps> = ({ onToggleSidebar }) => {
         <div className="flex items-center gap-3">
           {isAuthenticated ? (
             <div className="flex items-center gap-3">
+              {/* Active Role / Persona Switcher */}
+              <div className="relative" ref={personaRef}>
+                <button
+                  type="button"
+                  onClick={() => setIsPersonaOpen(!isPersonaOpen)}
+                  className={`flex items-center gap-2 px-3 py-1.5 rounded-xl border text-xs font-bold transition-all duration-200 shadow-2xs ${
+                    user?.activePersona === 'EMPLOYER'
+                      ? 'bg-purple-50 text-purple-700 border-purple-200 hover:bg-purple-100'
+                      : user?.activePersona === 'FREELANCER'
+                      ? 'bg-emerald-50 text-emerald-700 border-emerald-200 hover:bg-emerald-100'
+                      : 'bg-indigo-50 text-indigo-700 border-indigo-200 hover:bg-indigo-100'
+                  }`}
+                >
+                  <span className="text-slate-400 font-medium text-[11px] hidden sm:inline">Active as:</span>
+                  <div className="flex items-center gap-1.5">
+                    {user?.activePersona === 'EMPLOYER' ? (
+                      <Building2 className="w-3.5 h-3.5 text-purple-600" />
+                    ) : user?.activePersona === 'FREELANCER' ? (
+                      <Sparkles className="w-3.5 h-3.5 text-emerald-600" />
+                    ) : (
+                      <UserCheck className="w-3.5 h-3.5 text-indigo-600" />
+                    )}
+                    <span>
+                      {user?.activePersona === 'EMPLOYER'
+                        ? 'Employer / Client'
+                        : user?.activePersona === 'FREELANCER'
+                        ? 'Freelancer'
+                        : 'Job Seeker'}
+                    </span>
+                  </div>
+                  <ChevronDown className="w-3 h-3 opacity-70" />
+                </button>
+
+                {isPersonaOpen && (
+                  <div className="absolute right-0 mt-2 w-72 rounded-2xl bg-white border border-slate-200/90 shadow-xl p-3 z-50 animate-fade-in text-slate-800">
+                    <div className="px-2 py-1.5 text-[10px] font-bold uppercase tracking-wider text-slate-400">
+                      Switch Active Mode
+                    </div>
+
+                    <div className="space-y-1 mt-1">
+                      {/* Job Seeker */}
+                      <button
+                        type="button"
+                        onClick={async () => {
+                          setIsPersonaOpen(false);
+                          await switchPersona('JOB_SEEKER');
+                          navigate('/dashboard');
+                        }}
+                        className={`w-full p-2.5 rounded-xl text-left transition-all duration-200 flex items-start gap-2.5 ${
+                          user?.activePersona === 'JOB_SEEKER' || !user?.activePersona
+                            ? 'bg-indigo-50/80 border border-indigo-200 text-indigo-900 font-bold'
+                            : 'hover:bg-slate-50 text-slate-700'
+                        }`}
+                      >
+                        <div className="w-7 h-7 rounded-lg bg-indigo-100 text-indigo-700 flex items-center justify-center shrink-0 mt-0.5">
+                          <UserCheck className="w-3.5 h-3.5" />
+                        </div>
+                        <div className="flex-1">
+                          <div className="text-xs font-bold flex items-center justify-between">
+                            <span>Job Seeker</span>
+                            {(user?.activePersona === 'JOB_SEEKER' || !user?.activePersona) && (
+                              <span className="w-1.5 h-1.5 rounded-full bg-indigo-600" />
+                            )}
+                          </div>
+                          <p className="text-[10px] text-slate-500 font-normal leading-tight mt-0.5">
+                            Search jobs, manage applications & interview prep
+                          </p>
+                        </div>
+                      </button>
+
+                      {/* Employer */}
+                      <button
+                        type="button"
+                        onClick={async () => {
+                          setIsPersonaOpen(false);
+                          await switchPersona('EMPLOYER');
+                          navigate('/employer');
+                        }}
+                        className={`w-full p-2.5 rounded-xl text-left transition-all duration-200 flex items-start gap-2.5 ${
+                          user?.activePersona === 'EMPLOYER'
+                            ? 'bg-purple-50/80 border border-purple-200 text-purple-900 font-bold'
+                            : 'hover:bg-slate-50 text-slate-700'
+                        }`}
+                      >
+                        <div className="w-7 h-7 rounded-lg bg-purple-100 text-purple-700 flex items-center justify-center shrink-0 mt-0.5">
+                          <Building2 className="w-3.5 h-3.5" />
+                        </div>
+                        <div className="flex-1">
+                          <div className="text-xs font-bold flex items-center justify-between">
+                            <span>Employer / Client</span>
+                            {user?.activePersona === 'EMPLOYER' && (
+                              <span className="w-1.5 h-1.5 rounded-full bg-purple-600" />
+                            )}
+                          </div>
+                          <p className="text-[10px] text-slate-500 font-normal leading-tight mt-0.5">
+                            Post jobs, review applicant CVs & hire talent
+                          </p>
+                        </div>
+                      </button>
+
+                      {/* Freelancer */}
+                      <button
+                        type="button"
+                        onClick={async () => {
+                          setIsPersonaOpen(false);
+                          await switchPersona('FREELANCER');
+                          navigate('/jobs');
+                        }}
+                        className={`w-full p-2.5 rounded-xl text-left transition-all duration-200 flex items-start gap-2.5 ${
+                          user?.activePersona === 'FREELANCER'
+                            ? 'bg-emerald-50/80 border border-emerald-200 text-emerald-900 font-bold'
+                            : 'hover:bg-slate-50 text-slate-700'
+                        }`}
+                      >
+                        <div className="w-7 h-7 rounded-lg bg-emerald-100 text-emerald-700 flex items-center justify-center shrink-0 mt-0.5">
+                          <Sparkles className="w-3.5 h-3.5" />
+                        </div>
+                        <div className="flex-1">
+                          <div className="text-xs font-bold flex items-center justify-between">
+                            <span>Freelancer</span>
+                            {user?.activePersona === 'FREELANCER' && (
+                              <span className="w-1.5 h-1.5 rounded-full bg-emerald-600" />
+                            )}
+                          </div>
+                          <p className="text-[10px] text-slate-500 font-normal leading-tight mt-0.5">
+                            Offer freelance services & contract proposals
+                          </p>
+                        </div>
+                      </button>
+                    </div>
+                  </div>
+                )}
+              </div>
+
               {/* Notification Center */}
               <div className="relative" ref={notificationRef}>
                 <button

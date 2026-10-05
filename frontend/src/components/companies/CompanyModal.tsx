@@ -95,7 +95,7 @@ export const CompanyModal: React.FC<CompanyModalProps> = ({
     >
       <form onSubmit={handleSubmit} className="space-y-4">
         {error && (
-          <div className="p-3 text-xs text-rose-300 bg-rose-500/10 border border-rose-500/20 rounded-lg">
+          <div className="p-3 text-xs text-rose-700 bg-rose-50 border border-rose-200 rounded-xl font-medium">
             {error}
           </div>
         )}
@@ -110,8 +110,8 @@ export const CompanyModal: React.FC<CompanyModalProps> = ({
 
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
           <Input
-            label="Website"
-            placeholder="https://company.com"
+            label="Website / Careers Link"
+            placeholder="https://company.com/careers"
             value={formData.website || ''}
             onChange={(e) => setFormData({ ...formData, website: e.target.value })}
           />
@@ -133,34 +133,34 @@ export const CompanyModal: React.FC<CompanyModalProps> = ({
 
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
           <Input
-            label="Primary Contact"
-            placeholder="e.g. John Doe (Tech Lead)"
+            label="Primary Contact / Recruiter"
+            placeholder="e.g. Sarah Jenkins (Recruiter)"
             value={formData.contactPerson || ''}
             onChange={(e) => setFormData({ ...formData, contactPerson: e.target.value })}
           />
 
           <Input
             label="Contact Email"
-            placeholder="john@company.com"
+            placeholder="recruiter@company.com"
             value={formData.contactEmail || ''}
             onChange={(e) => setFormData({ ...formData, contactEmail: e.target.value })}
           />
         </div>
 
         <div>
-          <label className="block text-xs font-semibold uppercase tracking-wider text-slate-400 mb-1.5">
-            Internal Notes
+          <label className="block text-xs font-semibold uppercase tracking-wider text-slate-700 mb-1.5">
+            Internal Notes & Target Insights
           </label>
           <textarea
             rows={3}
-            placeholder="Interview insights, company mission, team structure notes..."
+            placeholder="Interview insights, tech stack, company mission, referral contacts..."
             value={formData.notes || ''}
             onChange={(e) => setFormData({ ...formData, notes: e.target.value })}
-            className="w-full bg-slate-900 border border-slate-800 rounded-lg p-3 text-sm text-slate-100 focus:outline-none focus:ring-2 focus:ring-indigo-500 placeholder-slate-500"
+            className="w-full bg-white border border-slate-200 rounded-xl p-3 text-sm text-slate-900 focus:outline-none focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-600 placeholder-slate-400 shadow-sm"
           />
         </div>
 
-        <div className="pt-4 border-t border-slate-800 flex items-center justify-between">
+        <div className="pt-4 border-t border-slate-200 flex items-center justify-between">
           {initialData?.id && onDelete ? (
             <Button
               type="button"
@@ -181,7 +181,7 @@ export const CompanyModal: React.FC<CompanyModalProps> = ({
               Cancel
             </Button>
             <Button type="submit" variant="primary" size="sm" isLoading={isLoading}>
-              {initialData ? 'Save Changes' : 'Create Company'}
+              {initialData ? 'Save Changes' : 'Create Target Company'}
             </Button>
           </div>
         </div>

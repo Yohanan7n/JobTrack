@@ -11,6 +11,7 @@ async function main() {
   await prisma.interview.deleteMany();
   await prisma.application.deleteMany();
   await prisma.company.deleteMany();
+  await prisma.jobPosting.deleteMany();
   await prisma.user.deleteMany();
 
   const hashedPassword = await bcrypt.hash('Password123!', 10);
@@ -18,10 +19,14 @@ async function main() {
   // 1. Create Admin user
   const admin = await prisma.user.create({
     data: {
-      name: 'Sarah Connor (Admin)',
+      name: 'Sarah Connor (Admin & Employer)',
       email: 'admin@jobtrack.dev',
       password: hashedPassword,
       role: 'ADMIN',
+      activePersona: 'EMPLOYER',
+      title: 'Talent Acquisition & Technical Recruiter',
+      companyName: 'TechVentures & Partners',
+      bio: 'Hiring world-class engineering and product talent across global distributed teams.',
       status: 'ACTIVE',
       avatar: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=150',
     },
@@ -34,8 +39,78 @@ async function main() {
       email: 'demo@jobtrack.dev',
       password: hashedPassword,
       role: 'USER',
+      activePersona: 'JOB_SEEKER',
+      title: 'Full-Stack Developer & UI Enthusiast',
+      bio: 'Passionate developer building sleek web applications with React, TypeScript, Node.js, and Postgres.',
+      skills: 'React, TypeScript, Node.js, PostgreSQL, TailwindCSS, Next.js',
+      hourlyRate: 65,
       status: 'ACTIVE',
       avatar: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=150',
+    },
+  });
+
+  // Seed Job Marketplace Postings (Created by Sarah / Employer)
+  await prisma.jobPosting.create({
+    data: {
+      employerId: admin.id,
+      title: 'Senior Full-Stack Engineer',
+      companyName: 'Stripe',
+      location: 'San Francisco, CA / Remote',
+      locationType: 'REMOTE',
+      employmentType: 'FULL_TIME',
+      salaryRange: '$160,000 - $195,000',
+      description: 'Join Stripe to build the next generation of global economic infrastructure. You will work on real-time billing, payment routing, and developer API engines.',
+      requirements: '5+ years experience with distributed systems, React, Node.js or Ruby, and cloud architecture.',
+      skills: 'React, Node.js, TypeScript, PostgreSQL, Distributed Systems',
+      status: 'OPEN',
+    },
+  });
+
+  await prisma.jobPosting.create({
+    data: {
+      employerId: admin.id,
+      title: 'Product Engineer (Frontend & UI Craft)',
+      companyName: 'Linear',
+      location: 'San Francisco, CA / Remote',
+      locationType: 'REMOTE',
+      employmentType: 'FULL_TIME',
+      salaryRange: '$145,000 - $180,000',
+      description: 'Linear is looking for a product-minded frontend engineer with extreme attention to visual craft, keyboard-first interactions, and real-time local sync.',
+      requirements: 'Deep mastery of React, TypeScript, CSS transitions, WebSockets, and indexedDB offline engines.',
+      skills: 'React, TypeScript, TailwindCSS, State Management, Sync Engines',
+      status: 'OPEN',
+    },
+  });
+
+  await prisma.jobPosting.create({
+    data: {
+      employerId: admin.id,
+      title: 'Next.js & Edge Runtime Specialist',
+      companyName: 'Vercel',
+      location: 'Remote',
+      locationType: 'REMOTE',
+      employmentType: 'FULL_TIME',
+      salaryRange: '$150,000 - $190,000',
+      description: 'Help scale the frontend cloud for millions of developers worldwide. You will optimize SSR, Server Components, and edge middleware performance.',
+      requirements: 'Experience maintaining open-source libraries, deep understanding of web standards, HTTP/2, and React 19.',
+      skills: 'Next.js, React 19, TypeScript, Edge Computing, Web Standards',
+      status: 'OPEN',
+    },
+  });
+
+  await prisma.jobPosting.create({
+    data: {
+      employerId: admin.id,
+      title: 'Freelance Mobile App Developer (Expo & React Native)',
+      companyName: 'TechVentures Studio',
+      location: 'Remote',
+      locationType: 'REMOTE',
+      employmentType: 'CONTRACT',
+      salaryRange: '$75 - $110 / hour',
+      description: 'Seeking a seasoned mobile freelancer to develop an MVP cross-platform iOS and Android app for high-growth consumer fintech.',
+      requirements: 'Demonstrated portfolio of published App Store & Play Store apps, React Native, Zustand, and GraphQL.',
+      skills: 'React Native, Expo, Mobile UI, TypeScript, GraphQL',
+      status: 'OPEN',
     },
   });
 

@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import { register, login, getMe, updateProfile, forgotPassword, uploadAvatar } from '../controllers/auth.controller';
+import { register, login, getMe, updateProfile, forgotPassword, uploadAvatar, updatePersona } from '../controllers/auth.controller';
 import { authenticate } from '../middleware/auth.middleware';
 import { validateRequest } from '../middleware/validate.middleware';
 import { upload } from '../middleware/upload.middleware';
@@ -13,6 +13,7 @@ router.post('/login', loginRateLimiter, validateRequest(loginSchema), login);
 router.post('/forgot-password', validateRequest(forgotPasswordSchema), forgotPassword);
 router.get('/me', authenticate, getMe);
 router.put('/profile', authenticate, validateRequest(updateProfileSchema), updateProfile);
+router.patch('/persona', authenticate, updatePersona);
 router.post('/avatar', authenticate, upload.single('avatar'), uploadAvatar);
 
 export default router;

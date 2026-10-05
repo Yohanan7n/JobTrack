@@ -1,9 +1,17 @@
+export type PersonaType = 'JOB_SEEKER' | 'EMPLOYER' | 'FREELANCER';
+
 export interface User {
   id: string;
   name: string;
   email: string;
   role: 'USER' | 'ADMIN';
   status: 'ACTIVE' | 'SUSPENDED';
+  activePersona?: PersonaType;
+  title?: string | null;
+  bio?: string | null;
+  skills?: string | null;
+  hourlyRate?: number | null;
+  companyName?: string | null;
   avatar?: string | null;
   createdAt?: string;
 }

@@ -16,6 +16,8 @@ import { DocumentsPage } from './pages/DocumentsPage';
 import { AnalyticsPage } from './pages/AnalyticsPage';
 import { ProfilePage } from './pages/ProfilePage';
 import { AdminPage } from './pages/AdminPage';
+import { JobMarketplacePage } from './pages/JobMarketplacePage';
+import { EmployerHubPage } from './pages/EmployerHubPage';
 import { NotFoundPage } from './pages/NotFoundPage';
 
 // Protected Route Guard
@@ -84,6 +86,11 @@ export const App: React.FC = () => {
         }
       >
         <Route path="/dashboard" element={<DashboardPage />} />
+        <Route path="/jobs" element={<JobMarketplacePage />} />
+        <Route path="/employer" element={<EmployerHubPage />} />
+        <Route path="/employer/post-job" element={<EmployerHubPage activeTab="post" />} />
+        <Route path="/employer/candidates" element={<EmployerHubPage activeTab="candidates" />} />
+        <Route path="/employer/talent" element={<EmployerHubPage activeTab="talent" />} />
         <Route path="/applications" element={<ApplicationsPage />} />
         <Route path="/companies" element={<CompaniesPage />} />
         <Route path="/interviews" element={<InterviewsPage />} />

@@ -21,7 +21,21 @@ export const getCompanies = async (req: AuthenticatedRequest, res: Response, nex
       where,
       include: {
         applications: {
-          select: { id: true, position: true, status: true, applicationDate: true },
+          select: {
+            id: true,
+            position: true,
+            status: true,
+            applicationDate: true,
+            jobUrl: true,
+            notes: true,
+            salary: true,
+            location: true,
+            interviews: {
+              select: { id: true, title: true, scheduledAt: true, type: true },
+              orderBy: { scheduledAt: 'desc' },
+              take: 1,
+            },
+          },
           orderBy: { applicationDate: 'desc' },
         },
       },

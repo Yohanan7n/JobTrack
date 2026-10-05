@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { useAuth } from '../hooks/useAuth';
 import { authService } from '../services/auth.service';
 import { Input } from '../components/common/Input';
@@ -18,7 +18,11 @@ import {
 } from 'lucide-react';
 
 export const LoginPage: React.FC = () => {
-  const [email, setEmail] = useState('');
+  const location = useLocation();
+  const searchParams = new URLSearchParams(location.search);
+  const paramEmail = searchParams.get('email') || '';
+
+  const [email, setEmail] = useState(paramEmail);
   const [password, setPassword] = useState('');
   const [rememberMe, setRememberMe] = useState(true);
   const [targetPortal, setTargetPortal] = useState<'user' | 'admin'>('user');
@@ -219,11 +223,61 @@ export const LoginPage: React.FC = () => {
               isLoading={isLoading}
               rightIcon={<ArrowRight className="w-4 h-4" />}
             >
-              {targetPortal === 'admin' ? 'Sign In as Administrator' : 'Sign In as Job Seeker'}
+              {targetPortal === 'admin' ? 'Sign In as Administrator / Employer' : 'Sign In as Job Seeker'}
             </Button>
           </form>
 
-          <div className="mt-6 pt-5 border-t border-slate-100 text-center text-xs text-slate-500">
+          {/* Quick Demo Credentials Box */}
+          <div className="mt-4 p-3.5 rounded-2xl bg-slate-50 border border-slate-200 text-xs text-slate-600 space-y-2">
+            <div className="font-bold text-slate-800 flex items-center justify-between text-[11px]">
+              <span>Demo Test Credentials:</span>
+              <span className="text-[10px] text-indigo-600 font-semibold bg-indigo-50 px-2 py-0.5 rounded-full">
+                Ready to use
+              </span>
+            </div>
+
+            <div className="flex items-center justify-between bg-white p-2 rounded-xl border border-slate-200/80">
+              <div className="text-[11px]">
+                <span className="font-bold text-indigo-700">Job Seeker:</span>{' '}
+                <span className="font-mono text-slate-800">demo@jobtrack.dev</span>
+              </div>
+              <button
+                type="button"
+                onClick={() => {
+                  setEmail('demo@jobtrack.dev');
+                  setPassword('Password123!');
+                  setTargetPortal('user');
+                }}
+                className="text-[11px] font-bold text-indigo-600 hover:text-indigo-800 px-2 py-0.5 rounded-md hover:bg-indigo-50"
+              >
+                Use
+              </button>
+            </div>
+
+            <div className="flex items-center justify-between bg-white p-2 rounded-xl border border-slate-200/80">
+              <div className="text-[11px]">
+                <span className="font-bold text-purple-700">Admin / Employer:</span>{' '}
+                <span className="font-mono text-slate-800">admin@jobtrack.dev</span>
+              </div>
+              <button
+                type="button"
+                onClick={() => {
+                  setEmail('admin@jobtrack.dev');
+                  setPassword('Password123!');
+                  setTargetPortal('admin');
+                }}
+                className="text-[11px] font-bold text-purple-600 hover:text-purple-800 px-2 py-0.5 rounded-md hover:bg-purple-50"
+              >
+                Use
+              </button>
+            </div>
+
+            <div className="text-[11px] text-slate-500 text-center font-mono">
+              Password for both: <strong className="text-slate-800">Password123!</strong>
+            </div>
+          </div>
+
+          <div className="mt-5 pt-4 border-t border-slate-100 text-center text-xs text-slate-500">
             Don't have an account?{' '}
             <Link
               to="/register"

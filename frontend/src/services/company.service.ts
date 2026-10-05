@@ -1,5 +1,22 @@
 import { api } from './api';
 
+export interface CompanyApplication {
+  id: string;
+  position: string;
+  status: string;
+  applicationDate: string;
+  jobUrl?: string | null;
+  notes?: string | null;
+  salary?: string | null;
+  location?: string | null;
+  interviews?: Array<{
+    id: string;
+    title: string;
+    scheduledAt: string;
+    type: string;
+  }>;
+}
+
 export interface Company {
   id: string;
   userId: string;
@@ -12,13 +29,8 @@ export interface Company {
   notes?: string | null;
   createdAt: string;
   applicationCount?: number;
-  latestApplication?: {
-    id: string;
-    position: string;
-    status: string;
-    applicationDate: string;
-  } | null;
-  applications?: any[];
+  latestApplication?: CompanyApplication | null;
+  applications?: CompanyApplication[];
 }
 
 export const companyService = {

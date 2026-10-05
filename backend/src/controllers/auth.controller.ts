@@ -7,7 +7,7 @@ import { AuthenticatedRequest } from '../middleware/auth.middleware';
 
 export const register = async (req: AuthenticatedRequest, res: Response, next: NextFunction) => {
   try {
-    const { name, email, password } = req.body;
+    const { name, email, password, role: requestedRole } = req.body;
 
     const existingUser = await prisma.user.findUnique({
       where: { email: email.toLowerCase() },
@@ -19,9 +19,9 @@ export const register = async (req: AuthenticatedRequest, res: Response, next: N
 
     const hashedPassword = await hashPassword(password);
 
-    // If first user, make ADMIN, otherwise USER
+    // If first user, make ADMIN, otherwise respect requestedRole (defaults to USER)
     const count = await prisma.user.count();
-    const role = count === 0 ? 'ADMIN' : 'USER';
+    const role = count === 0 ? 'ADMIN' : (requestedRole === 'ADMIN' ? 'ADMIN' : 'USER');
 
     const user = await prisma.user.create({
       data: {
@@ -29,6 +29,7 @@ export const register = async (req: AuthenticatedRequest, res: Response, next: N
         email: email.toLowerCase(),
         password: hashedPassword,
         role,
+        activePersona: role === 'ADMIN' ? 'EMPLOYER' : 'JOB_SEEKER',
       },
       select: {
         id: true,
@@ -36,6 +37,12 @@ export const register = async (req: AuthenticatedRequest, res: Response, next: N
         email: true,
         role: true,
         status: true,
+        activePersona: true,
+        title: true,
+        bio: true,
+        skills: true,
+        hourlyRate: true,
+        companyName: true,
         avatar: true,
         createdAt: true,
       },
@@ -92,6 +99,12 @@ export const login = async (req: AuthenticatedRequest, res: Response, next: Next
         email: user.email,
         role: user.role,
         status: user.status,
+        activePersona: user.activePersona || 'JOB_SEEKER',
+        title: user.title,
+        bio: user.bio,
+        skills: user.skills,
+        hourlyRate: user.hourlyRate,
+        companyName: user.companyName,
         avatar: user.avatar,
         createdAt: user.createdAt,
       },
@@ -112,6 +125,12 @@ export const getMe = async (req: AuthenticatedRequest, res: Response, next: Next
         email: true,
         role: true,
         status: true,
+        activePersona: true,
+        title: true,
+        bio: true,
+        skills: true,
+        hourlyRate: true,
+        companyName: true,
         avatar: true,
         createdAt: true,
       },
@@ -129,7 +148,7 @@ export const getMe = async (req: AuthenticatedRequest, res: Response, next: Next
 
 export const updateProfile = async (req: AuthenticatedRequest, res: Response, next: NextFunction) => {
   try {
-    const { name, avatar, currentPassword, newPassword } = req.body;
+    const { name, avatar, title, bio, skills, hourlyRate, companyName, currentPassword, newPassword } = req.body;
     const userId = req.user!.id;
 
     const user = await prisma.user.findUnique({ where: { id: userId } });
@@ -140,6 +159,11 @@ export const updateProfile = async (req: AuthenticatedRequest, res: Response, ne
     const updateData: any = {};
     if (name) updateData.name = name;
     if (avatar !== undefined) updateData.avatar = avatar;
+    if (title !== undefined) updateData.title = title;
+    if (bio !== undefined) updateData.bio = bio;
+    if (skills !== undefined) updateData.skills = skills;
+    if (hourlyRate !== undefined) updateData.hourlyRate = Number(hourlyRate);
+    if (companyName !== undefined) updateData.companyName = companyName;
 
     if (newPassword) {
       if (!currentPassword) {
@@ -161,12 +185,51 @@ export const updateProfile = async (req: AuthenticatedRequest, res: Response, ne
         email: true,
         role: true,
         status: true,
+        activePersona: true,
+        title: true,
+        bio: true,
+        skills: true,
+        hourlyRate: true,
+        companyName: true,
         avatar: true,
         updatedAt: true,
       },
     });
 
     return successResponse(res, updatedUser, 'Profile updated successfully');
+  } catch (error) {
+    next(error);
+  }
+};
+
+export const updatePersona = async (req: AuthenticatedRequest, res: Response, next: NextFunction) => {
+  try {
+    const { persona } = req.body;
+    if (!['JOB_SEEKER', 'EMPLOYER', 'FREELANCER'].includes(persona)) {
+      return errorResponse(res, 'Invalid persona. Must be JOB_SEEKER, EMPLOYER, or FREELANCER', 400);
+    }
+
+    const updated = await prisma.user.update({
+      where: { id: req.user!.id },
+      data: { activePersona: persona },
+      select: {
+        id: true,
+        name: true,
+        email: true,
+        role: true,
+        status: true,
+        activePersona: true,
+        title: true,
+        bio: true,
+        skills: true,
+        hourlyRate: true,
+        companyName: true,
+        avatar: true,
+        createdAt: true,
+      },
+    });
+
+    return successResponse(res, updated, `Switched persona to ${persona}`);
   } catch (error) {
     next(error);
   }
