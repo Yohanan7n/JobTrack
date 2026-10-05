@@ -13,12 +13,15 @@ import {
   ShieldCheck,
   CheckCircle2,
   Zap,
+  User as UserIcon,
+  Shield,
 } from 'lucide-react';
 
 export const LoginPage: React.FC = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [rememberMe, setRememberMe] = useState(true);
+  const [targetPortal, setTargetPortal] = useState<'user' | 'admin'>('user');
   const [error, setError] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState(false);
 
@@ -38,7 +41,18 @@ export const LoginPage: React.FC = () => {
       const response = await authService.login({ email, password });
       const { user, token } = response.data.data;
       login(token, user);
-      navigate('/dashboard');
+
+      // Route according to selected portal and user permissions
+      if (targetPortal === 'admin') {
+        if (user.role === 'ADMIN') {
+          navigate('/admin');
+        } else {
+          // Standard user logged into Admin portal tab
+          navigate('/dashboard');
+        }
+      } else {
+        navigate('/dashboard');
+      }
     } catch (err: any) {
       setError(err.response?.data?.error || 'Invalid credentials. Please check your email and password.');
     } finally {
@@ -81,8 +95,66 @@ export const LoginPage: React.FC = () => {
           </p>
         </div>
 
+        {/* Portal Destination Selector */}
+        <div className="mb-4 p-1.5 bg-slate-100/90 border border-slate-200 rounded-2xl grid grid-cols-2 gap-1.5 shadow-inner">
+          <button
+            type="button"
+            onClick={() => setTargetPortal('user')}
+            className={`py-2.5 px-3 rounded-xl text-xs font-bold flex items-center justify-center gap-2 transition-all duration-200 ${
+              targetPortal === 'user'
+                ? 'bg-white text-indigo-700 shadow-sm border border-slate-200/80 scale-[1.01]'
+                : 'text-slate-600 hover:text-slate-900 hover:bg-slate-50'
+            }`}
+          >
+            <UserIcon className="w-4 h-4 text-indigo-600" />
+            <span>User Side</span>
+          </button>
+
+          <button
+            type="button"
+            onClick={() => setTargetPortal('admin')}
+            className={`py-2.5 px-3 rounded-xl text-xs font-bold flex items-center justify-center gap-2 transition-all duration-200 ${
+              targetPortal === 'admin'
+                ? 'bg-white text-purple-700 shadow-sm border border-slate-200/80 scale-[1.01]'
+                : 'text-slate-600 hover:text-slate-900 hover:bg-slate-50'
+            }`}
+          >
+            <Shield className="w-4 h-4 text-purple-600" />
+            <span>Admin Side</span>
+          </button>
+        </div>
+
         {/* Form Card */}
         <div className="bg-white/95 border border-slate-200/90 rounded-3xl p-6 sm:p-8 shadow-xl shadow-slate-200/50 backdrop-blur-md">
+          {/* Active Portal Indicator Banner */}
+          <div
+            className={`mb-4 p-3 rounded-xl border flex items-center justify-between text-xs transition-colors ${
+              targetPortal === 'admin'
+                ? 'bg-purple-50/80 border-purple-200 text-purple-900'
+                : 'bg-indigo-50/80 border-indigo-200 text-indigo-900'
+            }`}
+          >
+            <div className="flex items-center gap-2 min-w-0">
+              <span
+                className={`w-2.5 h-2.5 rounded-full shrink-0 animate-pulse ${
+                  targetPortal === 'admin' ? 'bg-purple-600' : 'bg-indigo-600'
+                }`}
+              />
+              <span className="font-bold truncate">
+                Destination: {targetPortal === 'admin' ? 'Admin Control Center' : 'User Pipeline Dashboard'}
+              </span>
+            </div>
+            <span
+              className={`text-[10px] font-bold px-2 py-0.5 rounded-full uppercase tracking-wider shrink-0 ${
+                targetPortal === 'admin'
+                  ? 'bg-purple-100 text-purple-700 border border-purple-200'
+                  : 'bg-indigo-100 text-indigo-700 border border-indigo-200'
+              }`}
+            >
+              {targetPortal === 'admin' ? 'Admin Portal' : 'User Portal'}
+            </span>
+          </div>
+
           {error && (
             <div className="mb-4 p-3 rounded-xl bg-rose-50 border border-rose-200 text-xs text-rose-700 font-medium flex items-center gap-2">
               <span className="w-2 h-2 rounded-full bg-rose-500 shrink-0" />
@@ -94,7 +166,7 @@ export const LoginPage: React.FC = () => {
             <Input
               label="Email Address"
               type="email"
-              placeholder="you@domain.com"
+              placeholder={targetPortal === 'admin' ? 'admin@jobtrack.dev' : 'you@domain.com'}
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               leftIcon={<Mail className="w-4 h-4 text-indigo-500" />}
@@ -139,11 +211,15 @@ export const LoginPage: React.FC = () => {
               type="submit"
               variant="primary"
               size="lg"
-              className="w-full mt-2 font-bold shadow-md shadow-indigo-500/20"
+              className={`w-full mt-2 font-bold shadow-md transition-all ${
+                targetPortal === 'admin'
+                  ? 'bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-700 hover:to-indigo-700 shadow-purple-500/20'
+                  : 'shadow-indigo-500/20'
+              }`}
               isLoading={isLoading}
               rightIcon={<ArrowRight className="w-4 h-4" />}
             >
-              Sign In to JobTrack
+              {targetPortal === 'admin' ? 'Sign In as Administrator' : 'Sign In as Job Seeker'}
             </Button>
           </form>
 
