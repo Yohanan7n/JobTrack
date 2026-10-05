@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import React, { useState, useEffect, useRef } from 'react';
+import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { useAuth } from '../../hooks/useAuth';
 import {
   Briefcase,
@@ -18,7 +18,43 @@ interface NavbarProps {
 export const Navbar: React.FC<NavbarProps> = ({ onToggleSidebar }) => {
   const { user, logout, isAuthenticated } = useAuth();
   const [isNotificationOpen, setIsNotificationOpen] = useState(false);
+  const notificationRef = useRef<HTMLDivElement>(null);
   const navigate = useNavigate();
+  const location = useLocation();
+
+  // Close notification dropdown whenever the user navigates
+  useEffect(() => {
+    setIsNotificationOpen(false);
+  }, [location.pathname]);
+
+  // Close notification dropdown when clicking outside or pressing Escape
+  useEffect(() => {
+    if (!isNotificationOpen) return;
+
+    const handleClickOutside = (event: MouseEvent) => {
+      if (
+        notificationRef.current &&
+        !notificationRef.current.contains(event.target as Node)
+      ) {
+        setIsNotificationOpen(false);
+      }
+    };
+
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') {
+        setIsNotificationOpen(false);
+      }
+    };
+
+    // Use capture or bubble mousedown so clicks on other buttons close it immediately
+    document.addEventListener('mousedown', handleClickOutside);
+    document.addEventListener('keydown', handleKeyDown);
+
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+      document.removeEventListener('keydown', handleKeyDown);
+    };
+  }, [isNotificationOpen]);
 
   const handleLogout = () => {
     logout();
@@ -57,7 +93,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onToggleSidebar }) => {
           {isAuthenticated ? (
             <div className="flex items-center gap-3">
               {/* Notification Center */}
-              <div className="relative">
+              <div className="relative" ref={notificationRef}>
                 <button
                   type="button"
                   onClick={() => setIsNotificationOpen(!isNotificationOpen)}
