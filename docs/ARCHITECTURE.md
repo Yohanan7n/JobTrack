@@ -4,51 +4,6 @@ This document describes the high-level architecture, design decisions, and secur
 
 ---
 
-## 📐 High-Level Architecture Diagram
-
-```mermaid
-graph TD
-    Client["Client Browser<br/>(React 18 + Vite + Tailwind CSS)"]
-    
-    subgraph "Frontend Layer"
-        SPA["React Router v7 SPA"]
-        TanStackQuery["TanStack React Query Cache"]
-        AxiosClient["Axios HTTP Interceptor<br/>(JWT Token Bearer)"]
-        RechartsEngine["Recharts Visualization Engine"]
-    end
-
-    subgraph "Backend API Layer (Express + TypeScript)"
-        Router["Express REST Router (/api)"]
-        AuthMiddleware["JWT Authentication Guard"]
-        RoleMiddleware["Role-Based Access Control (Admin)"]
-        ValidationMiddleware["Zod Schema Validator"]
-        Controllers["Controllers & Business Logic"]
-        MulterStorage["Multer File Upload Stream"]
-    end
-
-    subgraph "Persistence & Storage"
-        PrismaORM["Prisma Client ORM"]
-        PostgresDB[(PostgreSQL / SQLite Database)]
-        LocalStorage[("Local Static Uploads (/uploads)")]
-    end
-
-    Client --> SPA
-    SPA --> TanStackQuery
-    TanStackQuery --> AxiosClient
-    SPA --> RechartsEngine
-
-    AxiosClient -->|"HTTP / JSON REST"| Router
-    Router --> AuthMiddleware
-    AuthMiddleware --> RoleMiddleware
-    RoleMiddleware --> ValidationMiddleware
-    ValidationMiddleware --> Controllers
-    Controllers --> PrismaORM
-    Controllers --> MulterStorage
-    MulterStorage --> LocalStorage
-    PrismaORM --> PostgresDB
-```
-
----
 
 ## 🧩 Architectural Highlights
 
