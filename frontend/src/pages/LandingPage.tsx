@@ -8,7 +8,6 @@ import {
   ShieldCheck,
   FileText,
   ArrowRight,
-  CheckCircle2,
   Sparkles,
 } from 'lucide-react';
 import { Button } from '../components/common/Button';
