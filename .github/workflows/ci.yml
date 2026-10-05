@@ -31,6 +31,9 @@ jobs:
       - name: Typecheck Backend
         run: npm --prefix backend run build
 
+      - name: Ensure Linux Native Binaries for Vite / Rollup
+        run: npm --prefix frontend install @rollup/rollup-linux-x64-gnu --no-save
+
       - name: Build Frontend Production Bundle
         run: npm --prefix frontend run build
 
