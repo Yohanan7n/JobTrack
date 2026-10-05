@@ -80,20 +80,6 @@ export const LandingPage: React.FC = () => {
               </Button>
             </Link>
           </div>
-
-          {/* Quick Demo Credentials Box for Reviewers & Recruiters */}
-          <div className="mt-10 max-w-md mx-auto p-3.5 rounded-xl bg-slate-900/90 border border-indigo-500/30 text-left shadow-lg">
-            <div className="flex items-center justify-between text-xs font-semibold text-slate-300 mb-1.5">
-              <span className="flex items-center gap-1.5 text-indigo-400">
-                <CheckCircle2 className="w-3.5 h-3.5" /> Quick Demo Credentials
-              </span>
-              <span className="text-[10px] text-slate-500 font-mono">1-click test</span>
-            </div>
-            <div className="text-xs text-slate-400 font-mono space-y-0.5">
-              <div><strong className="text-slate-200">Demo User:</strong> demo@jobtrack.dev / Password123!</div>
-              <div><strong className="text-slate-200">Admin User:</strong> admin@jobtrack.dev / Password123!</div>
-            </div>
-          </div>
         </div>
       </section>
 

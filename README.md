@@ -18,9 +18,10 @@
 ## 🌟 Executive Preview & Live Demo
 
 - **Live Demo Link**: [https://jobtrack-demo.vercel.app](https://jobtrack-demo.vercel.app) *(or run locally in 2 minutes)*
-- **Demo Accounts (Pre-seeded with realistic data)**:
-  - 👤 **Job Seeker**: `demo@jobtrack.dev` / `Password123!`
-  - 🛡️ **Administrator**: `admin@jobtrack.dev` / `Password123!`
+- **User Roles Supported**:
+  - 👤 **Job Seeker**: Search jobs, track Kanban applications, upload CVs, and log interviews.
+  - 🏢 **Employer / Client**: Post job openings, review applicants, and manage recruitment pipelines.
+  - 🛡️ **Administrator**: System telemetry, audit logs, and platform management.
 
 ```
 ┌──────────────────────────────────────────────────────────────┐
@@ -246,16 +247,6 @@ docker compose up -d --build
 
 ---
 
-## 🔑 Test Credentials
-
-| Account | Email | Password | Role | Description |
-|---|---|---|---|---|
-| **Demo Job Seeker** | `demo@jobtrack.dev` | `Password123!` | `USER` | 15+ pre-seeded applications, upcoming interviews, and documents across all stages |
-| **Administrator** | `admin@jobtrack.dev` | `Password123!` | `ADMIN` | Full access to Admin Panel, user moderation, and server telemetry |
-
-*(On the login screen, clicking either button will automatically populate these credentials for instant evaluation.)*
-
----
 
 ## ⚙️ Environment Variables
 
